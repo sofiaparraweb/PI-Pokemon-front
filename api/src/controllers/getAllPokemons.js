@@ -74,12 +74,15 @@ const getAllPokemons = async (req, res) => {
     byName = pokemonApi.find((pokemon) => {
       return pokemon.name === name.toLowerCase()}) 
     }
- 
+   
+    if(!byName) {
+      res.status(404).json(`No pokemon found with the name ${name}`);
+    }
     res.status(200).json(byName)
-  
+
   }
   } catch (error) {
-    res.status(404).json('No se encontró el pokemon!!');
+    res.status(500).json('Internal server error');
   }
 }
 
