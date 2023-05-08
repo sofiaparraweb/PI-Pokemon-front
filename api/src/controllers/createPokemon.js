@@ -1,65 +1,27 @@
 const { Pokemon, Type } = require('../db');
 const axios = require("axios");
-require('dotenv').config();
-const { URL_BASE} = process.env;
 
-const createPokemon= async (req, res) => {
+const createPokemon = async (req, res) => {
+    try {
+        //Desestructuro lo que viene como parametro
+        const { name, image, life, attack, defense, speed, height, weight, type } = req.body;
+        
+        const arreTypes = Array.isArray(type) ?
+        await Promise.all(type.map(async(t)=>{
+            return await Type.findOne({ where: { name: t } });
+        })) : [];
 
- const { name, image, life, attack, defense } = req.body;
- 
-    /*try {
-        const razas = await axios.get(`${URL_BASE}/v1/breeds?key=${API_KEY}`)
-        const razasOnly = razas.data.map((raza) => {
-            return {
-                id: raza.id,
-                name: raza.name,
-                height: raza.height.imperial,
-                weight: raza.weight.imperial,
-                life_span: raza.life_span,
-                image: raza.image.url,
-                temperaments: raza.temperament,
+        //Se crea el pokemon nuevo
+        let newPokemon = await Pokemon.create({ name, image, life, attack, defense, speed, height, weight, type });
+        
+        //Asocia el pokemon con el tipo enviado anteriormente
+        newPokemon.addType(arreTypes);
 
-            }
-        })
-
-        const dogs = await Dog.findAll({
-            include: [{
-                model: Temperaments,
-                attributes: ['name'],
-                through: {
-                    attributes: []
-                }
-            }]
-        });
-
-        const cleanDogs = dogs.map((raza) => {
-            return {
-                id: raza.id,
-                name: raza.name,
-                height: raza.height,
-                weight: raza.weight,
-                life_span: raza.life_span,
-                image: raza.image,
-                temperaments: raza.temperaments.map(obj => obj.name).join(', '),
-
-            }
-        });
-
-        const response = [...cleanDogs, ...razasOnly]
-        const verificarName = response.filter((dog) => dog.name.toLowerCase() === name.toLowerCase());
-        if (verificarName.length !== 0) return res.status(400).json({ error: "Ya exite la raza" });
-
-        const dog = await Dog.create({ name, height, weight, life_span, image });
-
-        dog.addTemperament(temperament);
-        res.status(200).json(dog);
-
-    } catch (error) {
-
-        console.log(error.message);
-
+        res.status(200).json(newPokemon);
     }
-*/
+    catch (error) {
+        res.status(404).json({error: error.message});
+    }
 }
 
 module.exports = createPokemon;
