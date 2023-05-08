@@ -1,5 +1,6 @@
 const { Pokemon, Type } = require('../db');
 const axios = require("axios");
+const { Op } = require('sequelize');
 
 const getPokemonDetails = async (url) => {
   const pokemonData = await axios(url);
@@ -19,9 +20,11 @@ const getPokemonDetails = async (url) => {
 };
 
 const getAllPokemons = async (req, res) => {
+  const { name } = req.query;
+  
   try {
     const api = await axios(`https://pokeapi.co/api/v2/pokemon?limit=200`);
-    const pokemonDetails = await Promise.all(api.data.results.map(async (pk) => {
+    const pokemonApi = await Promise.all(api.data.results.map(async (pk) => {
       return await getPokemonDetails(pk.url);
     }));
 
@@ -50,13 +53,33 @@ const getAllPokemons = async (req, res) => {
       }
     });
 
-    const allPokemons = [...pokemonDetails, ...pokemonDb];
-
-    res.json(allPokemons).status(200);
-
+    if(!name) {
+      const allPokemons = [...pokemonApi, ...pokemonDb];
+      res.json(allPokemons).status(200);
+    } else {
+      let byName = await Pokemon.findOne({
+        where: {
+         name: {
+      [Op.iLike]: `%${name}%`,
+     },
+         },
+         include: [{
+         model: Type,
+         attributes: ['name'],
+        through: { attributes: [] },
+         }]
+          });
+          
+    if(!byName) {
+    byName = pokemonApi.find((pokemon) => {
+      return pokemon.name === name.toLowerCase()}) 
+    }
+ 
+    res.status(200).json(byName)
+  
+  }
   } catch (error) {
-    console.log(error.message);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(404).json('No se encontró el pokemon!!');
   }
 }
 
