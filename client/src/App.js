@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, useLocation } from 'react-router-dom';
-import { Landing, Home, Detail, Form } from './views/index';
+import { Landing, Home, Detail, Create } from './views/index';
 import NavBar from './components/NAVBAR/NavBar';
 
 function App() {
@@ -12,7 +12,7 @@ return (
       <Route exact path='/' component={Landing} />
       <Route path='/home' component={Home} />
       <Route exact path='/detail' component={Detail} />
-      <Route exact path='/create' component={Form} />
+      <Route exact path='/create' component={Create}/>
     </div>
   );
 }

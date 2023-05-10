@@ -1,11 +1,12 @@
 import Detail from './DETAIL/Detail';
-import Form from './FORM/Form';
-import Home from './HOME/Home';
+import Create from './CREATE/Create';
 import Landing from './LANDING/Landing';
+import Home from './HOME/Home';
 
 export {
     Detail,
-    Form,
+    Create,
     Home,
     Landing
 };
+ 
