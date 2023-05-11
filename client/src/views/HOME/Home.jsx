@@ -1,23 +1,17 @@
-import React from 'react';
-import Cards from '../../components/CARDS/Cards';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getPokemons } from '../../redux/actions';
+import { useSelector } from 'react-redux';
+import { Cards } from '../../components/index'
 
 const Home = () => {
+    
+    const pokemons = useSelector((state) => state.pokemons)
 
-  const dispatch = useDispatch();
-  
-  useEffect(()=> {
-dispatch(getPokemons());
-  }, [dispatch])
-
- return (
-    <div>
-     <h1>HOMEEE</h1>
-     <Cards />
-    </div>
-  );
+    return (
+        <div className=''>
+            <div>
+                <Cards pokemons={pokemons}/>
+            </div>
+        </div>
+    )
 }
 
-export default Home; 
+export default Home;

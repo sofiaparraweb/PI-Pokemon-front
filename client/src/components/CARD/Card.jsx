@@ -1,21 +1,19 @@
-//ESTE COMPONENTE DEBE MOSTRAR LA INFO 
-//DE CADA POKEMON MAPEADO, PERO ADEMAS, 
-//DARNS UN LINK PARA IR AL DETALLE 
-//DEL POKEMON EN CUESTION
-import './Card.css'
-
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Card.css';
 
 const Card = (props) => {
   return (
-    <div className="card-container">
-      <p className="card-name">{props.name}</p>
-      <img className="card-image" src={props.image} alt="Pokemon" />
-      <p className="card-stat">HP: {props.life}</p>
-      <p className="card-stat">Attack: {props.attack}</p>
-      <p className="card-stat">Defense: {props.defense}</p>
-    </div>
+      <div className="card-container">
+       <Link to={`/pokemons/${props.id}`} className="card-link">
+          <p className="card-name">{props.name}</p>
+        </Link>
+        <img className="card-image" src={props.image} alt="Pokemon" />
+        <p className="card-stat">HP: {props.life}</p>
+        <p className="card-stat">Attack: {props.attack}</p>
+        <p className="card-stat">Defense: {props.defense}</p>
+        <p className="card-stat">Type: {props.types}</p>
+      </div>
   );
 };
 

@@ -1,0 +1,29 @@
+.SearchBar {
+    display: flex;
+    align-items: center;
+  }
+  
+  input[type="text"] {
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  button img {
+    width: 30px;
+    height: 30px;
+  }
+  

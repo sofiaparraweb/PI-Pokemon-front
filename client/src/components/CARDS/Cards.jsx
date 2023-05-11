@@ -1,13 +1,23 @@
 ////ESTE COMPONENTE DEBE TOMAR UN ARRAY DE POKEMONS, 
 //Y POR CADA POKEMON, RENDERIZAR UN COMPONENTE CARD
-import React from 'react';
+import React, { useEffect} from 'react';
 import Card from '../CARD/Card'
 import './Cards.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPokemons } from '../../redux/actions';
 
 const Cards = () => {
 
-const pokemons = useSelector(state=>state.pokemons)
+// console.log(pokemons)
+// if (!Array.isArray(pokemons)) {
+//   return <div>Loading...</div>;
+// }
+const dispatch = useDispatch();
+  const pokemons = useSelector(state => state.pokemons);
+
+  useEffect(() => {
+    dispatch(getPokemons());
+  }, [dispatch]);
 
   return (
     <div className="cards-container">
@@ -15,6 +25,7 @@ const pokemons = useSelector(state=>state.pokemons)
         return (
           <Card
             key={pokemon.id}
+            id={pokemon.id}
             name={pokemon.name}
             image={pokemon.image}
             attack={pokemon.attack}
@@ -22,6 +33,7 @@ const pokemons = useSelector(state=>state.pokemons)
             speed={pokemon.speed}
             height={pokemon.height}
             weight={pokemon.weight}
+            types={pokemon.types.join(", ")}
           />
         );
       })}
