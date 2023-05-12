@@ -8,16 +8,17 @@ import { getPokemons } from '../../redux/actions';
 
 const Cards = () => {
 
-// console.log(pokemons)
-// if (!Array.isArray(pokemons)) {
-//   return <div>Loading...</div>;
-// }
 const dispatch = useDispatch();
   const pokemons = useSelector(state => state.pokemons);
 
   useEffect(() => {
     dispatch(getPokemons());
   }, [dispatch]);
+
+  console.log(pokemons)
+if (!Array.isArray(pokemons)) {
+return <div>Loading your pokemon...</div>;
+}
 
   return (
     <div className="cards-container">

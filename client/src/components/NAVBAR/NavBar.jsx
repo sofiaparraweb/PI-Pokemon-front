@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { getPokemonName, getPokemons } from '../../redux/actions';
 import SearchBar from '../SEARCHBAR/SearchBar';
-import FilterSortButtons from './FilterSortButton';
 import './NavBar.css';
+import FilterSortButton from '../FILTERSORTBUTTON/FilterSortButton';
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -25,26 +25,15 @@ const NavBar = () => {
       setName('');
   }
   
-  function handleTypeFilter(type) {
-    console.log(`Filter by ${type} clicked`);
-  }
-
-  function handleSortOrder(order) {
-    console.log(`Sort ${order} clicked`);
-  }
-
   return (
     <div className='NavBar'>
      <Link to='/home'>HOME</Link>
      <Link to='/create'>FORM</Link>
      <Link to='/about'>ABOUT</Link>
+     <FilterSortButton />
      <SearchBar 
         handleInputChange={handleInputChange} 
         handleSearchSubmit={handleSearchSubmit} />
-     <FilterSortButtons
-        handleTypeFilter={handleTypeFilter}
-        handleSortOrder={handleSortOrder}
-      />
     </div>
   );
 }

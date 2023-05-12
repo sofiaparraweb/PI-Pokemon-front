@@ -1,7 +1,7 @@
 // la action nes la descripcion especiifca de lo  q tengo q hacer
 
 import axios from 'axios'
-import { GET_POKEMONS, GET_POKEMON_DETAIL, GET_POKEMON_NAME, ORDER_ASC, ORDER_DES, GET_POKEMON_TYPE, FILTER, FILTER_DBAPI } from './action-types'
+import { GET_POKEMONS, GET_POKEMON_DETAIL, GET_POKEMON_NAME, FILTER_TYPE, FILTER_DBAPI, GET_POKEMON_TYPE, ORDER_BY_NAME, ORDER_BY_ATTACK } from './action-types'
 
 export const getPokemons = () => {
     return async function (dispatch) { 
@@ -37,28 +37,22 @@ export const getPokemonsByType = () => {
     };
   };
   
-
-  export const OrderAsc = (id) => {
-    return {
-        type: ORDER_ASC, 
-        payload: id 
-}
-  };
-
-  export const OrderDes = (id) => {
-    return {
-        type: ORDER_DES,
-        payload: id
-    }
-  }
-
-  export const filter = (value) => {
-    return { type: FILTER, payload:value}
+  export const filterType = (value) => {
+    return { type: FILTER_TYPE, payload:value}
 }
 
-export const filterDBAPI = (value) => {
+  export const filterDBAPI = (value) => {
     return { type: FILTER_DBAPI, payload:value}
 }
+
+export const orderByAttack = (value) => {
+  return { type: ORDER_BY_ATTACK, payload: value };
+};
+
+export const OrderByName = (name) => {
+    return { type: ORDER_BY_NAME, payload: name }
+}
+
 
 
   
