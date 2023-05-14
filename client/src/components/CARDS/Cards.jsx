@@ -9,7 +9,7 @@ import { getPokemons } from '../../redux/actions';
 const Cards = () => {
 
 const dispatch = useDispatch();
-  const pokemons = useSelector(state => state.pokemons);
+const pokemons = useSelector(state => state.pokemons);
 
   useEffect(() => {
     dispatch(getPokemons());
@@ -43,3 +43,4 @@ return <div>Loading your pokemon...</div>;
 };
 
 export default Cards;
+

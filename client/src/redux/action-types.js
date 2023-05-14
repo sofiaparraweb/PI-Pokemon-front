@@ -6,6 +6,7 @@ export const FILTER_DBAPI = 'FILTER_DBAPI';
 export const ORDER_BY_NAME = 'ORDER_BY_NAME';
 export const ORDER_BY_ATTACK = 'ORDER_BY_ATTACK';
 export const GET_POKEMON_TYPE = 'GET_POKEMON_TYPE'
+export const GET_POKEMON_IMG = 'GET_POKEMON_IMG'
 
 // Botones/Opciones para filtrar por tipo, y por si su 
 // origen es de la API o de la base de datos (creados por 

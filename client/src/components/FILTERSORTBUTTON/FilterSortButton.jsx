@@ -1,25 +1,20 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { orderByAttack } from '../../redux/actions';
-import { useSelector } from 'react-redux';
+import { orderByAttack, OrderByName } from '../../redux/actions';
 
 function FilterSortButton() {
   const dispatch = useDispatch();
 
-  const pokemons = useSelector(state => state.pokemons);
+  // const pokemons = useSelector(state => state.pokemons);
+  // const types = useSelector(state => state.types)
 
-  console.log(pokemons)
-  // const handleFilterDBAPI = () => {
-  //   dispatch(filterDBAPI());
-  // };
-
-  // const handleFilterType = () => {
-  //   dispatch(filterType());
-  // };
-
-  // const handleOrderByName = () => {
-  //   dispatch(orderByName());
-  // };
+  const handleOrderNameUP = () => {
+    dispatch(OrderByName("Asc"));
+  };
+  
+  const handleOrderNameDOWN = () => {
+    dispatch(OrderByName("Desc"));
+  };
 
   const handleOrderAttackUP = () => {
     dispatch(orderByAttack("asc"));
@@ -31,11 +26,10 @@ function FilterSortButton() {
   
   return (
     <div>
-      {/* <button onClick={handleFilterDBAPI}>API</button>
-      <button onClick={handleFilterType}>DB</button>
-      <button onClick={handleOrderByName}>Order by Name</button> */}
       <button onClick={handleOrderAttackUP}>ATTACK UP</button>
       <button onClick={handleOrderAttackDOWN}>ATTACK DOWN</button>
+      <button onClick={handleOrderNameUP}>NAME UP</button>
+      <button onClick={handleOrderNameDOWN}>NAME DOWN</button>
     </div>
   );
 }

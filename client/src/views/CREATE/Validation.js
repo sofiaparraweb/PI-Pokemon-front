@@ -1,152 +1,95 @@
-// export const validateName = (pokemon, error, setError) => {
-//     if (!pokemon.name) setError('Please fill in this field')
-//     else {
-//         if(!isNaN(pokemon.name))setError('Cannot be a number');
-//         else{
-//             if (!/^[a-zA-Z0-9]+$/.test(pokemon.name))setError('Cannot contain special characters');
-//             else setError('');
-//         }
-//     }
-// };
+export const validatePokemon = (newPokemon, errors) => {
+  const newErrors = { ...errors };
 
-// export const validateImage = (pokemon, error, setError) => {
-//     if (!pokemon.image) setError('Please fill in this field');
-//     else {
-//         if(!isNaN(pokemon.image))setError('Cannot be a number');
-//         else{
-//             if (!/^[a-zA-Z0-9_.\-/]+$/.test(pokemon.image))setError('Cannot contain special characters');
-//             else setError('');
-//         }
-//     }
-// };
+  // Validar el nombre del pokemon
+if (!newPokemon.name) {
+  newErrors.name = 'Please fill in this field';
+} else if (!/^[a-zA-Z0-9]+$/.test(newPokemon.name)) {
+  newErrors.name = 'Name cannot contain special characters';
+} else if (!/^\D+$/.test(newPokemon.name)) {
+  newErrors.name = 'Name cannot contain a number';
+} else {
+  newErrors.name = '';
+}
 
-// export const validateLife = (pokemon, error, setError) => {
-//     if (!pokemon.life) setError('Please fill in this field')
-//     else {
-//         if(isNaN(pokemon.life))setError('Must contain only numbers');
-//         else setError('');
-//     }
-// };
-
-// export const validateAttack = (pokemon, error, setError) => { 
-//     if (!pokemon.attack) setError('Please fill in this field')
-//     else {
-//         if(isNaN(pokemon.attack))setError('Must contain only numbers');
-//         else setError('');
-//     }
-// };
-
-// export const validateDefense = (pokemon, error, setError) => {
-//     if (!pokemon.defense) setError('Please fill in this field')
-//     else {
-//         if(isNaN(pokemon.defense))setError('Must contain only numbers');
-//         else setError('');
-//     }
-// };
-
-// export const validateSpeed = (pokemon, error, setError) => {
-//     if(isNaN(pokemon.speed))setError('Must contain only numbers');
-//     else setError('');
-// };
-
-// export const validateHeight = (pokemon, error, setError) => {
-//     if(isNaN(pokemon.height))setError('Must contain only numbers');
-//     else setError('');
-// };
-
-// export const validateWeight = (pokemon, error, setError) => {
-//     if(isNaN(pokemon.weight))setError('Must contain only numbers');
-//     else setError('');
-// };
-
-// export const validateType = (pokemon, error, setError) => {
-//     if (!pokemon.type) setError('Please fill in this field')
-//     else setError('') 
-// };
+// Validar la vida del pokemon
+if (!newPokemon.life) {
+  newErrors.life = 'Please fill in this field';
+} else if (!/^[0-9]+$/.test(newPokemon.life)) {
+  newErrors.life = 'HP must contain only numbers';
+} else if (/^[^0-9]+$/.test(newPokemon.life)) {
+  newErrors.life = 'HP must contain only numbers';
+} else if (newPokemon.life < 1 || newPokemon.life > 150) {
+  newErrors.life = 'HP must be between 1 and 150';
+} else {
+  newErrors.life = '';
+}
 
 
-export const validatePokemon = (pokemon, error, setError) => {
-    // Validar el nombre del pokemon
-    if (!pokemon.name) {
-      setError('Please fill in this field');
-    } else if (!/^[a-zA-Z0-9]+$/.test(pokemon.name)) {
-      setError('Name cannot contain special characters');
-    } else if (isNaN(pokemon.name)) {
-      setError('Name cannot be a number');
-    } else {
-      setError('');
-    }
-  
-    // Validar la imagen del pokemon
-    if (!pokemon.image) {
-      setError('Please fill in this field');
-    } else if (!/^[a-zA-Z0-9_.\-/]+$/.test(pokemon.image)) {
-      setError('Image cannot contain special characters');
-    } else if (isNaN(pokemon.image)) {
-      setError('Image cannot be a number');
-    } else {
-      setError('');
-    }
-  
-    // Validar la vida del pokemon
-    if (!pokemon.life) {
-      setError('Please fill in this field');
-    } else if (isNaN(pokemon.life)) {
-      setError('Life must contain only numbers');
-    } else {
-      setError('');
-    }
-  
-    // Validar el ataque del pokemon
-    if (!pokemon.attack) {
-      setError('Please fill in this field');
-    } else if (isNaN(pokemon.attack)) {
-      setError('Attack must contain only numbers');
-    } else {
-      setError('');
-    }
-  
-    // Validar la defensa del pokemon
-    if (!pokemon.defense) {
-      setError('Please fill in this field');
-    } else if (isNaN(pokemon.defense)) {
-      setError('Defense must contain only numbers');
-    } else {
-      setError('');
-    }
-  
-    // Validar la velocidad del pokemon
-    if (!pokemon.speed) {
-      setError('Please fill in this field');
-    } else if (isNaN(pokemon.speed)) {
-      setError('Speed must contain only numbers');
-    } else {
-      setError('');
-    }
-  
-    // Validar la altura del pokemon
-    if (!pokemon.height) {
-      setError('Please fill in this field');
-    } else if (isNaN(pokemon.height)) {
-      setError('Height must contain only numbers');
-    } else {
-      setError('');
-    }
-  
-    // Validar el peso del pokemon
-    if (!pokemon.weight) {
-      setError('Please fill in this field');
-    } else if (isNaN(pokemon.weight)) {
-      setError('Weight must contain only numbers');
-    } else {
-      setError('');
-    }
-  
-    // Validar el tipo del pokemon
-    if (!pokemon.type) {
-      setError('Please fill in this field');
-    } else {
-      setError('');
-    }
-  };
-  
+// Validar el ataque del pokemon
+if (!newPokemon.attack) {
+  newErrors.attack = 'Please fill in this field';
+} else if (!/^\d+$/.test(newPokemon.attack)) {
+  newErrors.attack = 'Attack must contain only numbers';
+} else if (newPokemon.attack < 1 || newPokemon.attack > 250) {
+  newErrors.attack = 'Attack must be between 1 and 250';
+} else {
+  newErrors.attack = '';
+}
+
+// Validar la defensa del pokemon
+if (!newPokemon.defense) {
+  newErrors.defense = 'Please fill in this field';
+} else if (!/^\d+$/.test(newPokemon.defense)) {
+  newErrors.defense = 'Defense must contain only numbers';
+} else if (newPokemon.defense < 1 || newPokemon.defense > 250) {
+  newErrors.defense = 'Defense must be between 1 and 250';
+} else {
+  newErrors.defense = '';
+}
+
+// Validar la velocidad del pokemon
+if (!newPokemon.speed) {
+  newErrors.speed = 'Please fill in this field';
+} else if (!/^\d+$/.test(newPokemon.speed)) {
+  newErrors.speed = 'Speed must contain only numbers';
+} else if (newPokemon.speed < 1 || newPokemon.speed > 250) {
+  newErrors.speed = 'Speed must be between 1 and 250';
+} else {
+  newErrors.speed = '';
+}
+
+// Validar la altura del pokemon
+if (!newPokemon.height) {
+  newErrors.height = 'Please fill in this field';
+} else if (!/^\d+$/.test(newPokemon.height)) {
+  newErrors.height = 'Height must contain only numbers';
+} else if (newPokemon.height < 1 || newPokemon.height > 100) {
+  newErrors.height = 'Height must be between 1 and 100';
+} else {
+  newErrors.height = '';
+}
+
+// Validar el peso del pokemon
+if (!newPokemon.weight) {
+  newErrors.weight = 'Please fill in this field';
+} else if (!/^\d+$/.test(newPokemon.weight)) {
+  newErrors.weight = 'Weight must contain only numbers';
+} else if (newPokemon.weight < 1 || newPokemon.weight > 100) {
+  newErrors.weight = 'Weight must be between 1 and 100';
+} else {
+  newErrors.weight = '';
+}
+
+
+//   // Validar el tipo del pokemon
+// if (!newPokemon.type) {
+//   newErrors.type = 'Please select a type';
+// } else if (!types.some((type) => type.value === newPokemon.type)) {
+//   newErrors.type = 'Invalid type';
+// } else {
+//   newErrors.type = '';
+// }
+
+  return newErrors;
+};

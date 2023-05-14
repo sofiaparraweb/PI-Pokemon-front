@@ -1,111 +1,215 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-// import { validateName, validateAttack, validateDefense, validateHeight, validateImage, validateLife, validateSpeed, validateType, validateWeight } from './Validation';
+import React, { useEffect, useState } from 'react';
 import { validatePokemon } from './Validation';
+// import { pokemonImages } from '../../redux/actions';
+import { useDispatch} from "react-redux";
+import './Create.css'
+
 const Create = () => {
 
- const [newPokemon, setNewPokemon] = useState({
-  name: '',
-  hp: '',
-  attack: '',
-  defense: '',
-  speed: '',
-  height: '',
-  weight: '',
-  type: [],
- })
- 
- const [errors, setErrors] = useState({
-  name: '',
-  hp: '',
-  attack: '',
-  defense: '',
-  speed: '',
-  height: '',
-  weight: '',
-  type: [],
- })
+  const [newPokemon, setNewPokemon] = useState({
+    name: '',
+    image: '',
+    life: '',
+    attack: '',
+    defense: '',
+    speed: '',
+    height: '',
+    weight: '',
+    type: '',
+  });
 
-const changeHandler = (event) => {
+  const types = [
+    { value: '', label: 'Select a type' },
+    { value: 'normal', label: 'Normal' },
+    { value: 'fire', label: 'Fire' },
+    { value: 'water', label: 'Water' },
+    { value: 'electric', label: 'Electric' },
+    { value: 'grass', label: 'Grass' },
+    { value: 'ice', label: 'Ice' },
+    { value: 'fighting', label: 'Fighting' },
+    { value: 'poison', label: 'Poison' },
+    { value: 'ground', label: 'Ground' },
+    { value: 'flying', label: 'Flying' },
+    { value: 'psychic', label: 'Psychic' },
+    { value: 'bug', label: 'Bug' },
+    { value: 'rock', label: 'Rock' },
+    { value: 'ghost', label: 'Ghost' },
+    { value: 'dragon', label: 'Dragon' },
+    { value: 'dark', label: 'Dark' },
+    { value: 'steel', label: 'Steel' },
+    { value: 'fairy', label: 'Fairy' }
+  ];  
+  
+  const [errors, setErrors] = useState({
+    name: '',
+    image: '',
+    life: '',
+    attack: '',
+    defense: '',
+    speed: '',
+    height: '',
+    weight: '',
+    type: '',
+  });
+
+  const [formValid, setFormValid] = useState(false);
+
+  const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
+    setNewPokemon({ ...newPokemon, [property]: value });
+    setErrors(validatePokemon({ ...newPokemon, [property]: value }, setErrors));
+    setFormValid(Object.values(errors).every((val) => val === ''));
+  };
 
-    setNewPokemon({ ...newPokemon, [property]:value})
-//     validateName({...newPokemon, [property]:value}, errors, setErrors)
-//     validateAttack({...newPokemon, [property]:value}, errors, setErrors)
-//     validateDefense({...newPokemon, [property]:value}, errors, setErrors)
-//     validateHeight({...newPokemon, [property]:value}, errors, setErrors)
-//     validateImage({...newPokemon, [property]:value}, errors, setErrors)
-//     validateLife({...newPokemon, [property]:value}, errors, setErrors)
-//     validateSpeed({...newPokemon, [property]:value}, errors, setErrors)
-//     validateWeight({...newPokemon, [property]:value}, errors, setErrors)
-//     validateType({...newPokemon, [property]:value}, errors, setErrors)
-//
-    setErrors(validatePokemon(property, value, newPokemon, errors)); 
-}
+  const submitHandler = (event) => {
+    event.preventDefault();
+    setFormValid(Object.values(errors).every((val) => val === ''));
+    if (formValid) {
+      axios
+        .post('http://localhost:3001/pokemons', newPokemon)
+        .then((res) => {
+          alert(res.data.message);
+          setNewPokemon({
+            name: '',
+            image: '',
+            life: '',
+            attack: '',
+            defense: '',
+            speed: '',
+            height: '',
+            weight: '',
+            type: '',
+          });
+          setErrors({
+            name: '',
+            image: '',
+            life: '',
+            attack: '',
+            defense: '',
+            speed: '',
+            height: '',
+            weight: '',
+            type: '',
+          });
+        })
+        .catch((err) => alert(err));
+    } else {
+      alert('Please fill out all required fields before submitting the form.');
+    }
+  };
 
-const submitHandler = (event) => {
-  event.preventDefault()
-  if (
-    newPokemon.name &&
-    newPokemon.image &&
-    newPokemon.life &&
-    newPokemon.attack &&
-    newPokemon.defense &&
-    newPokemon.type.length > 0
-  ) { 
-    axios.post('http://localhost:3001/pokemons', newPokemon)
-      .then(res => alert(res))
-      .catch(err => alert(err))
-  }
-};
+
+  // ESTO ES PARA ELEGIR LA IMAGEN
+  // const [selectedImage, setSelectedImage] = useState(null);
+  // const dispatch = useDispatch();
+
+  // const handleImageClick = (imageUrl) => {
+  //   setSelectedImage(imageUrl);
+  // };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   // Aquí puedes enviar la URL de la imagen seleccionada junto con los demás datos del Pokemon al servidor
+  // };
+
+  // const loadPokemonImages = async () => {
+  //   try {
+  //     await dispatch(pokemonImages());
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   loadPokemonImages();
+  // }, []);
+
+  //ACA TERMINA LO  DE LA IAMGEN
 
   return (
-    <form onSubmit={submitHandler}>
-<div>
-  <label>Name</label>
-  <input type='text' value={newPokemon.name} onChange={changeHandler} name='name'/>
-  <span></span>
-</div>
+    <form onSubmit={submitHandler} className='form'>
+      <div>
+        <label>Name</label>
+        <input type='text' value={newPokemon.name} onChange={changeHandler} name='name' />
+        {errors.name && <span>{errors.name}</span>}
+      </div>
 
-<div>
-  <label>HP(life)</label>
-  <input type='text' value={newPokemon.hp} onChange={changeHandler} name='hp'/>
-</div>
+      <div>
+        <label>HP</label>
+        <input type='text' value={newPokemon.life} onChange={changeHandler} name='life' />
+        {errors.life && <span>{errors.life}</span>}
+      </div>
 
-<div>
-  <label>Attack</label>
-  <input type='text' value={newPokemon.attack} onChange={changeHandler} name='attack'/>
-</div>
+      <div>
+        <label>Attack</label>
+        <input type='text' value={newPokemon.attack} onChange={changeHandler} name='attack' />
+        {errors.attack && <span>{errors.attack}</span>}
+      </div>
 
-<div>
-  <label>Defense</label>
-  <input type='text' value={newPokemon.defense} onChange={changeHandler} name='defense'/>
-</div>
+      <div>
+        <label>Defense</label>
+        <input type='text' value={newPokemon.defense} onChange={changeHandler} name='defense' />
+        {errors.defense && <span>{errors.defense}</span>}
+      </div>
 
-<div>
-  <label>Speed</label>
-  <input type='text' value={newPokemon.speed} onChange={changeHandler} name='speed'/>
-</div>
+      <div>
+        <label>Speed</label>
+        <input type='text' value={newPokemon.speed} onChange={changeHandler} name='speed' />
+        {errors.speed && <span>{errors.speed}</span>}
+      </div>
 
-<div>
-  <label>Height</label>
-  <input type='text' value={newPokemon.height} onChange={changeHandler} name='height'/>
-</div>
+      <div>
+       <label>Height</label>
+       <input type='text' value={newPokemon.height} onChange={changeHandler} name='height'/>
+       {errors.height && <span>{errors.height}</span>}
+      </div>
 
-<div>
-  <label>Weight</label>
-  <input type='text' value={newPokemon.weight} onChange={changeHandler} name='weight'/>
-</div>
+      <div>
+       <label>Weight</label>
+       <input type='text' value={newPokemon.weight} onChange={changeHandler} name='weight'/>
+       {errors.weight && <span>{errors.weight}</span>}     
+      </div>
 
-<div>
+      {/* <div>
+  <h3>Select an image:</h3>
+  <div>
+   {pokemonImages ? pokemonImages.map((imageUrl) => (
+      <img
+        key={imageUrl}
+        src={imageUrl}
+        alt="Pokemon"
+        onClick={() => handleImageClick(imageUrl)}
+        className={selectedImage === imageUrl ? "selected" : ""}
+      />
+    )) : <p>Loading...</p>}
+  </div>
+</div> */}
+ 
+ <div>
+       <label>IMAGE</label>
+       <input type='text' value={newPokemon.image} onChange={changeHandler} name='image'/>
+       {errors.image && <span>{errors.image}</span>}     
+      </div>
+
+      <div>
   <label>Type</label>
-  <input type='text' value={newPokemon.type} onChange={changeHandler} name='type'/>
+  <select value={newPokemon.type} onChange={changeHandler} name='type'>
+    {types.map((type) => (
+      <option key={type.value} value={type.value}>
+        {type.label}
+      </option>
+    ))}
+  </select>
+  {errors.type && <span>{errors.type}</span>}
 </div>
 
-<button type='submit'>SUBMIT</button>
+
+      <button type='submit'>SUBMIT</button>
     </form>
   );
 }
+
 
 export default Create;
