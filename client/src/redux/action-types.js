@@ -6,7 +6,7 @@ export const FILTER_DBAPI = 'FILTER_DBAPI';
 export const ORDER_BY_NAME = 'ORDER_BY_NAME';
 export const ORDER_BY_ATTACK = 'ORDER_BY_ATTACK';
 export const GET_POKEMON_TYPE = 'GET_POKEMON_TYPE'
-export const GET_POKEMON_IMG = 'GET_POKEMON_IMG'
+//export const GET_POKEMON_IMG = 'GET_POKEMON_IMG'
 
 // Botones/Opciones para filtrar por tipo, y por si su 
 // origen es de la API o de la base de datos (creados por 
@@ -25,12 +25,12 @@ export const GET_POKEMON_IMG = 'GET_POKEMON_IMG'
 // en mi front tengo componentes y una carpeta redux con mis actions y mi reducer
 
 // Mis compoenntes son 
-// CARD -- renderiza una card con UN COMPONENTE
+// CARD -- renderiza una card con UN pokemons. El nombre tiene un link al componente DETAIL
 // CARDS-- renderiza todos los cards individuales en mi compoennte home
 // NAVBAR -- renderiza una navBar q incluye links a otras views y en ella la search bar
 // SearcBar --- aparece en NavBar y tiene la funcion de buscar un pokemon con su nombre
 // Create --- formulario para crear un pokemon, con un boton submit que lo sube a la base de datos y despues lo muestra en home
 // Detail --- muetsra el detalle de una Card especifica (deberia utilizar la ruta /pokemons/:idPokemon
-
+//HOME -- tienen todos los pokemons que traigo de la api. Renderiza las cards
 
 // Tambien tengo un reducer y actions..... ahora puedo empezar a hacer preguntas>? necesitas mas datos para ponerte en contexto?

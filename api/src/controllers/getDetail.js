@@ -35,7 +35,7 @@ const getDetail = async (req, res) => {
       }
 
       // Si no se encontró en la base de datos, devolver un error
-      return res.status(404).json({ error: 'No se encontró el Pokémon en la base de datos.' });
+return res.status(404).json({ error: 'Could not find the pokemon in the Data Base' });
     }
 
     // Buscar en la API
@@ -56,7 +56,7 @@ const getDetail = async (req, res) => {
 
     res.status(200).json(formattedPokemon);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(404).json({ error: error.message });
   }
 };
 

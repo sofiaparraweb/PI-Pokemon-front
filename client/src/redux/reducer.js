@@ -3,7 +3,9 @@
 // reducerr... hace esto
 // y ahi el reducer va y lo cambia
 // la info no es mas que las actions
-import { GET_POKEMONS, GET_POKEMON_NAME, GET_POKEMON_DETAIL, ORDER_BY_NAME, ORDER_BY_ATTACK, FILTER_TYPE, GET_POKEMON_TYPE, GET_POKEMON_IMG} from './action-types'
+import { GET_POKEMONS, GET_POKEMON_NAME, GET_POKEMON_DETAIL, ORDER_BY_NAME, ORDER_BY_ATTACK, FILTER_TYPE, GET_POKEMON_TYPE, 
+  //GET_POKEMON_IMG
+} from './action-types'
 
 const initialState = {
     pokemons: [],

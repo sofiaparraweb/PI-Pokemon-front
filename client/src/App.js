@@ -11,7 +11,7 @@ return (
       {location.pathname !== '/' && <NavBar />}
       <Route exact path='/' component={Landing} />
       <Route exact path='/home' component={Home} />
-      <Route exact path='/detail' component={Detail} />
+      <Route exact path='/detail/:id' component={Detail} />
       <Route exact path='/create' component={Create}/>
       <Route exact path='/about' component={About}/>
     </div>

@@ -1,8 +1,8 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { validatePokemon } from './Validation';
 // import { pokemonImages } from '../../redux/actions';
-import { useDispatch} from "react-redux";
+//import { useDispatch} from "react-redux";
 import './Create.css'
 
 const Create = () => {
@@ -70,7 +70,8 @@ const Create = () => {
       axios
         .post('http://localhost:3001/pokemons', newPokemon)
         .then((res) => {
-          alert(res.data.message);
+          console.log(res)
+          alert(res.data);
           setNewPokemon({
             name: '',
             image: '',

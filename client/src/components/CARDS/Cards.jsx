@@ -15,7 +15,6 @@ const pokemons = useSelector(state => state.pokemons);
     dispatch(getPokemons());
   }, [dispatch]);
 
-  console.log(pokemons)
 if (!Array.isArray(pokemons)) {
 return <div>Loading your pokemon...</div>;
 }
@@ -34,7 +33,7 @@ return <div>Loading your pokemon...</div>;
             speed={pokemon.speed}
             height={pokemon.height}
             weight={pokemon.weight}
-            types={pokemon.types.join(", ")}
+            types={pokemon.types}
           />
         );
       })}
