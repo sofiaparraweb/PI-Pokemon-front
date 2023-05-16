@@ -63,7 +63,7 @@ export const getPokemonsByType = () => {
     return { type: FILTER_TYPE, payload:value}
 }
 
-  export const filterDBAPI = (value) => {
+  export const filterDbApi = (value) => {
     return { type: FILTER_DBAPI, payload:value}
 }
 

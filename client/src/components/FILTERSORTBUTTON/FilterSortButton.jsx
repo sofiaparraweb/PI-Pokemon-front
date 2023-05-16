@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderByAttack, OrderByName, filterType, getPokemonsByType } from '../../redux/actions';
+import { orderByAttack, OrderByName, filterType, getPokemonsByType, filterDbApi} from '../../redux/actions';
 
 function FilterSortButton() {
   const dispatch = useDispatch();
   const types = useSelector(state => state.types);
   const [selectedType, setSelectedType] = React.useState('');
+  const [selectedOrigin, setSelectedOrigin] = React.useState('');
 
   useEffect(() => {
     dispatch(getPokemonsByType());
@@ -33,6 +34,12 @@ function FilterSortButton() {
     dispatch(filterType(type));
   };
 
+  const handleFilterDbApi = (event) => {
+    const origin = event.target.value;
+    setSelectedOrigin(origin);
+    dispatch(filterDbApi(origin));
+  };  
+
   return (
     <div>
       <button onClick={handleOrderAttackUP}>ATTACK UP</button>
@@ -46,6 +53,11 @@ function FilterSortButton() {
             {type.trim()}
           </option>
         ))}
+      </select>
+      <select value={selectedOrigin} onChange={handleFilterDbApi}>
+        <option value="">All Origins</option>
+        <option value="API">API</option>
+        <option value="DATABASE">BDD</option>
       </select>
     </div>
   );

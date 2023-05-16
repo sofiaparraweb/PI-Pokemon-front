@@ -3,23 +3,32 @@
 // reducerr... hace esto
 // y ahi el reducer va y lo cambia
 // la info no es mas que las actions
-import { GET_POKEMONS, GET_POKEMON_NAME, GET_POKEMON_DETAIL, ORDER_BY_NAME, ORDER_BY_ATTACK, FILTER_TYPE, GET_POKEMON_TYPE, 
+import { GET_POKEMONS, GET_POKEMON_NAME, GET_POKEMON_DETAIL, ORDER_BY_NAME, ORDER_BY_ATTACK, FILTER_TYPE, GET_POKEMON_TYPE, FILTER_DBAPI, 
   //GET_POKEMON_IMG
 } from './action-types'
 
 
 const initialState = {
-    pokemons: [],
-    types: "",
-    filteredPokemons: [],
-    pokemonsDetail: {},
-  };
+  pokemons: [],
+  types: "",
+  filteredPokemons: [],
+  pokemonsDetail: {},
+  apiPokemons: [], // Agrega esta línea
+};
+
 
 const rootReducer = (state = initialState, action) => {
-switch(action.type) {
-    case GET_POKEMONS:
-        return { ...state, pokemons: action.payload };
-    case GET_POKEMON_NAME:
+const {apiPokemons} = state;
+
+  switch(action.type) {
+  case GET_POKEMONS:
+    return {
+      ...state,
+      pokemons: action.payload,
+      apiPokemons: action.payload,
+      filteredPokemons: action.payload,
+    };
+   case GET_POKEMON_NAME:
         return{ ...state, pokemons: action.payload};
     case GET_POKEMON_DETAIL:
         return { ...state, pokemonsDetail: action.payload };
@@ -77,6 +86,23 @@ switch(action.type) {
     filteredPokemons,
   };
 
+  case FILTER_DBAPI:
+  if (action.payload !== 'all') {
+    const filteredDbApi = state.apiPokemons.filter((pokemon) => {
+      if (action.payload === 'API') {
+        return !isNaN(pokemon.id); // Filtrar los Pokémon cuyo ID no sea NaN (provenientes de la API)
+      }
+      if (action.payload === 'DATABASE') {
+        return isNaN(pokemon.id); // Filtrar los Pokémon cuyo ID sea NaN (provenientes de la base de datos)
+      }
+      return false;
+    });
+    return { ...state, filteredPokemons: filteredDbApi };
+  }
+  return { ...state, filteredPokemons: state.apiPokemons };
+
+  
+  
       // case GET_POKEMON_IMG:
       //   return {
       //     ...state,
