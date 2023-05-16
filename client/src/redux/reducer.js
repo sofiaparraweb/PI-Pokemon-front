@@ -7,9 +7,10 @@ import { GET_POKEMONS, GET_POKEMON_NAME, GET_POKEMON_DETAIL, ORDER_BY_NAME, ORDE
   //GET_POKEMON_IMG
 } from './action-types'
 
+
 const initialState = {
     pokemons: [],
-    types: [],
+    types: "",
     filteredPokemons: [],
     pokemonsDetail: {},
   };
@@ -41,7 +42,6 @@ switch(action.type) {
     pokemons: sortedPokemons,
     order: action.payload,
   };
-  
 
   case ORDER_BY_NAME:
     const pokemonsName = [...state.pokemons].sort((a, b) => {
@@ -62,15 +62,20 @@ switch(action.type) {
     
     case GET_POKEMON_TYPE:
       return { ...state, types: action.payload};
-    
-    case FILTER_TYPE:
-      const filteredPokemons = action.payload === ""
-  ? state.pokemons
-  : state.pokemons.filter((pokemon) => pokemon.type === action.payload);
-      return {
-        ...state,
-        filteredPokemons,
-      };
+
+      case FILTER_TYPE:
+  const filteredPokemons = action.payload === ""
+    ? state.pokemons
+    : state.pokemons.filter((pokemon) => {
+        if (action.payload === "All Types") {
+          return true; // Mostrar todos los Pokémon
+        }
+        return pokemon.types.includes(action.payload);
+      });
+  return {
+    ...state,
+    filteredPokemons,
+  };
 
       // case GET_POKEMON_IMG:
       //   return {

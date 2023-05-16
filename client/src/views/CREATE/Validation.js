@@ -49,34 +49,40 @@ if (!newPokemon.defense) {
 }
 
 // Validar la velocidad del pokemon
-if (!newPokemon.speed) {
-  newErrors.speed = 'Please fill in this field';
-} else if (!/^\d+$/.test(newPokemon.speed)) {
-  newErrors.speed = 'Speed must contain only numbers';
-} else if (newPokemon.speed < 1 || newPokemon.speed > 250) {
-  newErrors.speed = 'Speed must be between 1 and 250';
+if (newPokemon.speed !== '') {
+  if (!/^\d+$/.test(newPokemon.speed)) {
+    newErrors.speed = 'Speed must contain only numbers';
+  } else if (newPokemon.speed < 1 || newPokemon.speed > 250) {
+    newErrors.speed = 'Speed must be between 1 and 250';
+  } else {
+    newErrors.speed = '';
+  }
 } else {
   newErrors.speed = '';
 }
 
 // Validar la altura del pokemon
-if (!newPokemon.height) {
-  newErrors.height = 'Please fill in this field';
-} else if (!/^\d+$/.test(newPokemon.height)) {
-  newErrors.height = 'Height must contain only numbers';
-} else if (newPokemon.height < 1 || newPokemon.height > 100) {
-  newErrors.height = 'Height must be between 1 and 100';
+if (newPokemon.height !== '') {
+  if (!/^\d+$/.test(newPokemon.height)) {
+    newErrors.height = 'Height must contain only numbers';
+  } else if (newPokemon.height < 1 || newPokemon.height > 100) {
+    newErrors.height = 'Height must be between 1 and 100';
+  } else {
+    newErrors.height = '';
+  }
 } else {
   newErrors.height = '';
 }
 
 // Validar el peso del pokemon
-if (!newPokemon.weight) {
-  newErrors.weight = 'Please fill in this field';
-} else if (!/^\d+$/.test(newPokemon.weight)) {
-  newErrors.weight = 'Weight must contain only numbers';
-} else if (newPokemon.weight < 1 || newPokemon.weight > 100) {
-  newErrors.weight = 'Weight must be between 1 and 100';
+if (newPokemon.weight !== '') {
+  if (!/^\d+$/.test(newPokemon.weight)) {
+    newErrors.weight = 'Weight must contain only numbers';
+  } else if (newPokemon.weight < 1 || newPokemon.weight > 100) {
+    newErrors.weight = 'Weight must be between 1 and 100';
+  } else {
+    newErrors.weight = '';
+  }
 } else {
   newErrors.weight = '';
 }

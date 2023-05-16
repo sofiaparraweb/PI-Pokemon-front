@@ -29,6 +29,8 @@ const Detail = () => {
               <p key="defense">DEFENSE: {pokemonsDetail.defense}</p>
               <p key="height">HEIGHT: {pokemonsDetail.height}</p>
               <p key="weight">WEIGHT: {pokemonsDetail.weight}</p>
+              <img src={pokemonsDetail.image} alt={pokemonsDetail.name} />
+
               <div>
                 <p>TYPE:</p>
                 {pokemonsDetail.types && (

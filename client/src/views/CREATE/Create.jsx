@@ -16,7 +16,7 @@ const Create = () => {
     speed: '',
     height: '',
     weight: '',
-    type: '',
+    type: [],
   });
 
   const types = [
@@ -58,10 +58,36 @@ const Create = () => {
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-    setNewPokemon({ ...newPokemon, [property]: value });
+  
+    if (property === 'type') {
+      // Verificar si el tipo ya está presente en la lista
+      const typeIndex = newPokemon.type.indexOf(value);
+  
+      if (typeIndex === -1) {
+        // Agregar el tipo a la lista si no está presente
+        setNewPokemon((prevPokemon) => ({
+          ...prevPokemon,
+          type: [...prevPokemon.type, value],
+        }));
+      } else {
+        // Eliminar el tipo de la lista si ya está presente
+        setNewPokemon((prevPokemon) => ({
+          ...prevPokemon,
+          type: prevPokemon.type.filter((type) => type !== value),
+        }));
+      }
+    } else {
+      // Actualizar el valor de otros campos
+      setNewPokemon((prevPokemon) => ({
+        ...prevPokemon,
+        [property]: value,
+      }));
+    }
+  
     setErrors(validatePokemon({ ...newPokemon, [property]: value }, setErrors));
     setFormValid(Object.values(errors).every((val) => val === ''));
   };
+  
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -194,9 +220,9 @@ const Create = () => {
        {errors.image && <span>{errors.image}</span>}     
       </div>
 
-      <div>
+      <div className="type-select-container">
   <label>Type</label>
-  <select value={newPokemon.type} onChange={changeHandler} name='type'>
+  <select value={newPokemon.type} onChange={changeHandler} name="type" multiple>
     {types.map((type) => (
       <option key={type.value} value={type.value}>
         {type.label}
@@ -205,6 +231,7 @@ const Create = () => {
   </select>
   {errors.type && <span>{errors.type}</span>}
 </div>
+
 
 
       <button type='submit'>SUBMIT</button>

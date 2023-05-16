@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -11,32 +11,39 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
 
-  useEffect (()=>{
-      dispatch(getPokemons());
+  useEffect (() => {
+    dispatch(getPokemons());
   }, [dispatch]);
 
-  function handleInputChange(event){
-      setName(event.target.value);
+  function handleInputChange(event) {
+    setName(event.target.value);
   }
 
-  function handleSearchSubmit(event){
-      event.preventDefault();
-      dispatch(getPokemonName(name));
-      setName('');
+  function handleSearchSubmit(event) {
+    event.preventDefault();
+    dispatch(getPokemonName(name));
+    setName('');
   }
   
   return (
     <div className='NavBar'>
-     <Link to='/home'>HOME</Link>
-     <Link to='/create'>FORM</Link>
-     <Link to='/about'>ABOUT</Link>
-     <FilterSortButton />
-     <SearchBar 
-        handleInputChange={handleInputChange} 
-        handleSearchSubmit={handleSearchSubmit} />
+      <Link to='/home' className="logo">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png"
+          alt="Pokemon Logo"
+        />
+      </Link>
+      <div className="navLinks">
+        <Link to='/create'>FORM</Link>
+        <Link to='/about'>ABOUT</Link>
+        <FilterSortButton />
+      </div>
+      <SearchBar
+        handleInputChange={handleInputChange}
+        handleSearchSubmit={handleSearchSubmit}
+      />
     </div>
   );
 }
 
 export default NavBar;
-

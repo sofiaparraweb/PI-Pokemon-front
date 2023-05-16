@@ -40,7 +40,7 @@ describe('Pokemon routes', () => {
   
     it('should return an error if the pokemon does not exist', async () => {
       const invalidId = 'invalidId';
-      const response = await agent.get(`/pokemons/2000`);
+      const response = await agent.get(`/pokemons/${invalidId}`);
   
       expect(response.status).to.equal(404);
       expect(response.body.error).to.equal('Could not find the pokemon in the Data Base');

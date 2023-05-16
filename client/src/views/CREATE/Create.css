@@ -48,3 +48,9 @@
     background-color: #f28413;
   }
   
+  .type-select-container select {
+    width: 120%;
+    height: 5rem; /* Ajusta la altura deseada */
+    font-size: 1rem; /* Ajusta el tamaño de fuente deseado */
+  }
+  

@@ -32,12 +32,13 @@ export const getPokemonName = (name) => {
 }
 
 export const getPokemonsByType = () => {
-    return async function (dispatch) {
-      const apiData = await axios.get(`http://localhost:3001/type`);
-      const pokemonType = apiData.data;
-      dispatch({ type: GET_POKEMON_TYPE, payload: pokemonType });
-    };
+  return async function (dispatch) {
+    const apiData = await axios.get(`http://localhost:3001/types`);
+    const pokemonTypes = apiData.data.map((type) => type.name).join(",");
+    dispatch({ type: GET_POKEMON_TYPE, payload: pokemonTypes });
   };
+};
+
 
 // export const pokemonImages = () => {
 //     return async function (dispatch) {
