@@ -48,9 +48,11 @@ return <div>Loading your pokemon...</div>;
         );
       })}
     </div>
-    <div>
-      <Pagination page={page} setPage={setPage} max={max}/>
-    </div>
+    {pokemons.length > 0 && (
+        <div>
+          <Pagination page={page} setPage={setPage} max={max} />
+        </div>
+      )}
     </div>
   );
 };

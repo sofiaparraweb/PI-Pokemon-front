@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-color: orange;
-  color: black;
+  background-color: #d4786d; /* Color de fondo de la NavBar (color1) */
+  color: #e2e2ae; /* Color del texto de la NavBar (color4) */
   padding: 10px;
-  width: 15%;
+  width: 200px;
   position: fixed;
   top: 0;
   left: 0;

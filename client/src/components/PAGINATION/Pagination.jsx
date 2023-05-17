@@ -18,12 +18,13 @@ const Pagination = ({ page, setPage, max}) => {
         onClick={previousPage}
         className="pagination-button"
       >
-        ➤
+       {'<'}
       </button>
       {pageNumbers.map((pageNumber) => (
         <button
           key={pageNumber}
           onClick={() => setPage(pageNumber)}
+          className={pageNumber === page ? 'current-page' : 'pagination-button'}
         >
           {pageNumber}
         </button>
@@ -33,7 +34,7 @@ const Pagination = ({ page, setPage, max}) => {
         onClick={nextPage}
         className="pagination-button"
       >
-        ➤
+        {'>'}
       </button>
     </div>
   );
