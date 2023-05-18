@@ -1,4 +1,4 @@
-   .card-container {
+.card-container {
     width: 200px;
     height: 300px;
     perspective: 1000px;
@@ -8,12 +8,13 @@
   
   .card {
     position: relative;
-    width: 200px;
-    height: 250px;
+    width: 250px;
+    height: 300px;
     transform-style: preserve-3d;
     transition: transform 0.5s;
+     background-color: #faf8f8;
   }
-  
+
   .card:hover {
     transform: rotateY(180deg);
   }
@@ -47,7 +48,7 @@
     background-color: #ffffff;
     transform: perspective(600px) rotateY(180deg);
     padding: 15px;
-    background-color: rgba(210, 45, 23, 0.746);
+    background-color: #d64a3a;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -56,34 +57,39 @@
   }
   
   .card-name {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: monospace;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     left: 0;
     right: 0;
     text-align: center;
     text-transform: uppercase;
     text-decoration: none;
     font-size: 22px;
-    font-weight: bold;
-    color: black;
+    font-weight: 300;
+    color: #333333;
     width: 100%;
     height: 45px;
     line-height: 45px;
-    background-color: rgba(210, 45, 23, 0.746);
+    background-color: #eaeaea;
     backdrop-filter: blur(10px);
   }
-  
+
   .card-image {
-    width: 100%;
-    height: 110%;
-    object-fit: cover;
+    display: flex;
+    flex-direction: column;
+    width: 110%;
+    height: 200px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    object-position: center;
   }
   
+  
   .card-stat {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: monospace;
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 24px;
     letter-spacing: 2px;
     color: black;
     display: flex;
@@ -93,4 +99,5 @@
     text-decoration: none;
     text-transform: uppercase;
   }
-  
+
+

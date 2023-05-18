@@ -29,21 +29,26 @@ const NavBar = () => {
     <div className='NavBar'>
       <Link to='/home' className="logo">
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png"
+          src="https://i.pinimg.com/originals/9e/39/23/9e3923825ba4a4fa967858f980b8460f.png"
           alt="Pokemon Logo"
         />
       </Link>
-      <div className="navLinks">
-        <Link to='/create'>FORM</Link>
-        <Link to='/about'>ABOUT</Link>
-        <FilterSortButton />
-      </div>
+      <div className='searchBar'>
       <SearchBar
         handleInputChange={handleInputChange}
         handleSearchSubmit={handleSearchSubmit}
       />
+        </div> 
+      <div className='buttons'>
+      <FilterSortButton />
+      </div>
+      <div className="navLinks">
+        <Link to='/create'>CREATE YOUR POKEMON</Link>
+        <Link to='/about'>ABOUT</Link>
+      </div>
     </div>
+  
   );
 }
-
 export default NavBar;
+

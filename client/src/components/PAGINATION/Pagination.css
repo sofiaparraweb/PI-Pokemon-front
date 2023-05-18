@@ -10,21 +10,32 @@
   justify-content: center;
   align-items: center;
   font-size: 16px;
-  padding: 8px 12px;
+  padding: 8px 16px;
   margin: 0 5px;
-  border: 4px solid #ccc;
-  border-radius: 7px;
-  background-color: #b1afafd3;
-  color: #333;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  color: black;
   cursor: pointer;
+  text-decoration: none;
+  font-family: monospace;
+}
+
+.pagination-button.active {
+  background-color: #7faa80;
+  color: white;
+}
+
+.pagination-button:hover:not(.active) {
+  background-color: #ddd;
 }
 
 .current-page {
-  background-color: #a04545;
-  color: #ffffff;
+  background-color: #7faa80;
+  color: white;
   font-size: 16px;
-  padding: 8px 12px;
+  padding: 8px 16px;
   margin: 0 5px;
-  border: 1px solid #ccc;
+  border: none;
+  border-radius: 5px;
 }
-  
