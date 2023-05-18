@@ -41,9 +41,9 @@
   font-size: 14px; /* Alineamos el tamaño de fuente con otros elementos */
   margin-bottom: 10px;
   padding: 8px;
-  border: 1px solid #d2b48c;
+  border: 1px solid #f0ede9;
   border-radius: 4px;
-  background-color: #f5deb3;
+  background-color: whitesmoke
 }
 
 .NavBar .navLinks a:hover {

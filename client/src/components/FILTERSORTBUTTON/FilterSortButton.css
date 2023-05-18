@@ -1,52 +1,50 @@
 .FilterSortButton {
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* Alineación a la derecha */
     margin-top: 0;
     margin-bottom: 0;
   }
   
-  .FilterSortButton .section {
-    margin-top: -10px;
-    margin-bottom: -10px;
-    margin-left: 0px;
-    margin-right: 0px;
+  .FilterSortButton h2 {
+    font-size: 18px;
+    font-family: monospace;
+    color: white;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin-left: -90px;
   }
   
   .FilterSortButton h3 {
-    font-size: 14px; /* Tamaño más pequeño */
+    font-size: 14px;
     font-family: monospace;
-    color: black;
+    color: white;
     margin-bottom: 5px;
-    align-self: flex-end; /* Alineación a la derecha */
+    margin-left: -100px;
   }
   
-  .FilterSortButton button {
-    margin-right: 0; /* Eliminamos el margen derecho */
-    padding: 20px 16px; /* Aumentamos el tamaño de los botones */
+  .FilterSortButton .buttonAttack,
+  .FilterSortButton .buttonName,
+  .FilterSortButton .buttonOrigin,
+  .FilterSortButton .buttonType {
+    padding: 8px 12px;
     border: none;
     outline: none;
     cursor: pointer;
-    background-color: #fff; /* Fondo blanco */
+    background-color: #fff;
     color: #000;
     font-family: monospace;
-    font-size: 12px; /* Reducimos el tamaño de la fuente */
-    border-radius: 5px; /* Borde redondeado */
-    
-}
-  
-  .FilterSortButton button:hover {
-    background-color: #f9f9f9;
+    font-size: 12px;
+    border-radius: 5px;
+    width: 180px;
+    height: 30px;
+    margin-left: 10px;
   }
   
-  .FilterSortButton .buttons {
-    display: flex; /* Alineación de los botones */
-  }
-  
-  .FilterSortButton .buttons button {
-    margin-right: 5px;
-    font-size: 20px; /* Tamaño de las flechas más grandes */
-    padding: 8px; /* Aumentamos el espacio interno */
+  .FilterSortButton .buttonAttack button,
+  .FilterSortButton .buttonName button {
+    width: 90px;
+    height: 35px;
+    margin-top: 0px;
   }
   
   .FilterSortButton select {
@@ -54,7 +52,8 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     font-family: monospace;
-    font-size: 12px; /* Reducimos el tamaño de la fuente */
+    font-size: 12px;
+    width: 190px;
   }
   
   .FilterSortButton option {

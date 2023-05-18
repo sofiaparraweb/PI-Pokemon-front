@@ -43,23 +43,24 @@ function FilterSortButton() {
 
   return (
     <div className="FilterSortButton">
+      <h2>FILTERS:</h2>
       <div className="section">
         <h3>BY ATTACK</h3>
-        <div className="buttons">
+        <div className="buttonAttack">
           <button onClick={handleOrderAttackUP}>&uarr;</button>
           <button onClick={handleOrderAttackDOWN}>&darr;</button>
         </div>
       </div>
       <div className="section">
         <h3>BY NAME</h3>
-        <div className="buttons">
+        <div className="buttonName">
           <button onClick={handleOrderNameUP}>&uarr;</button>
           <button onClick={handleOrderNameDOWN}>&darr;</button>
         </div>
       </div>
       <div className="section">
         <h3>ORIGIN</h3>
-        <select value={selectedOrigin} onChange={handleFilterDbApi}>
+        <select value={selectedOrigin} onChange={handleFilterDbApi} className='buttonOrigin'>
           <option value="">All Origins</option>
           <option value="API">API</option>
           <option value="DATABASE">BDD</option>
@@ -67,7 +68,7 @@ function FilterSortButton() {
       </div>
       <div className="section">
         <h3>TYPE</h3>
-        <select value={selectedType} onChange={handleFilterType}>
+        <select value={selectedType} onChange={handleFilterType} className='buttonType'>
           <option value="">All Types</option>
           {types && types.split(',').map((type) => (
             <option key={type.trim()} value={type.trim()}>
