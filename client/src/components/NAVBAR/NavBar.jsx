@@ -10,20 +10,18 @@ import FilterSortButton from '../FILTERSORTBUTTON/FilterSortButton';
 const NavBar = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  useEffect (() => {
-    dispatch(getPokemons());
+  useEffect(() => {  
+  console.log("Fetching Pokemons");
+  dispatch(getPokemons());
   }, [dispatch]);
 
-  function handleInputChange(event) {
-    setName(event.target.value);
-  }
-
-  function handleSearchSubmit(event) {
-    event.preventDefault();
+  const handleSearchSubmit = name => {
+    setLoading(true);
     dispatch(getPokemonName(name));
     setName('');
-  }
+  };
   
   return (
     <div className='NavBar'>
@@ -34,21 +32,24 @@ const NavBar = () => {
         />
       </Link>
       <div className='searchBar'>
-      <SearchBar
-        handleInputChange={handleInputChange}
-        handleSearchSubmit={handleSearchSubmit}
-      />
-        </div> 
-      <div className='buttons'>
-      <FilterSortButton />
+        <SearchBar handleSearchSubmit={handleSearchSubmit} />
       </div>
-      <div className="navLinks">
-        <Link to='/create'>CREATE YOUR POKEMON</Link>
-        <Link to='/about'>ABOUT</Link>
+      <div className='buttons'>
+        <FilterSortButton />
+      </div>
+      <div>
+        <Link to='/create' className="create">
+          CREATE YOUR POKEMON
+        </Link>
+        <Link to='/about' className="about">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/16/16363.png"
+            alt="About Logo"
+          />
+        </Link>
       </div>
     </div>
-  
   );
-}
-export default NavBar;
+};
 
+export default NavBar;

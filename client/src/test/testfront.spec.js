@@ -1,9 +1,9 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Detail from '../Detail';
-import configureStore from 'redux-mock-store';
+const React = require('react');
+const { render, screen } = require('@testing-library/react');
+const { Provider } = require('react-redux');
+const { BrowserRouter: Router } = require('react-router-dom');
+const Detail = require('../Detail');
+const configureStore = require('redux-mock-store');
 
 const mockStore = configureStore([]);
 
@@ -13,13 +13,12 @@ describe('Detail', () => {
     const store = mockStore(initialState);
 
     render(
-      <Provider store={store}>
-        <Router>
-          <Detail />
-        </Router>
-      </Provider>
+      React.createElement(Provider, { store },
+        React.createElement(Router, null,
+          React.createElement(Detail, null)
+        )
+      )
     );
-
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
@@ -39,11 +38,11 @@ describe('Detail', () => {
     const store = mockStore(initialState);
 
     render(
-      <Provider store={store}>
-        <Router>
-          <Detail />
-        </Router>
-      </Provider>
+      React.createElement(Provider, { store },
+        React.createElement(Router, null,
+          React.createElement(Detail, null)
+        )
+      )
     );
 
     expect(screen.getByText('Pikachu')).toBeInTheDocument();

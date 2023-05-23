@@ -1,8 +1,7 @@
 // la action nes la descripcion especiifca de lo  q tengo q hacer
 
 import axios from 'axios'
-import { GET_POKEMONS, GET_POKEMON_DETAIL, GET_POKEMON_NAME, FILTER_TYPE, FILTER_DBAPI, GET_POKEMON_TYPE, ORDER_BY_NAME, ORDER_BY_ATTACK, 
-  //GET_POKEMON_IMG 
+import { GET_POKEMONS, GET_POKEMON_DETAIL, GET_POKEMON_NAME, FILTER_TYPE, FILTER_DBAPI, GET_POKEMON_TYPE, ORDER_BY_NAME, ORDER_BY_ATTACK, GET_POKEMON_IMG 
 } from './action-types'
 
 export const getPokemons = () => {
@@ -25,9 +24,15 @@ export const getPokemonDetail = (id) => {
 
 export const getPokemonName = (name) => {
     return async function (dispatch) { 
+      try { 
     const apiData = await axios.get(`http://localhost:3001/pokemons?name=${name}`);
     const pokemonName = apiData.data;
     dispatch({ type: GET_POKEMON_NAME, payload: pokemonName});
+}
+catch(error) {
+  console.log(error.pokemonName)
+  alert(error.pokemonName)
+}
 }
 }
 
@@ -40,23 +45,16 @@ export const getPokemonsByType = () => {
 };
 
 
-// export const pokemonImages = () => {
-//     return async function (dispatch) {
-//       const apiData = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10`);
-//       const pokemonImages = await apiData.data.sprites.front_default;
-//       dispatch({type: GET_POKEMON_IMG, payload: pokemonImages})
-//   }
-// }
-// export const pokemonImages = () => {
-//   return async function (dispatch) {
-//     const apiData = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10`);
-//     const pokemonImages = await apiData.data.results.map(async (result) => {
-//       const pokemonData = await axios.get(result.url);
-//       return pokemonData.data.sprites.front_default;
-//     });
-//     dispatch({type: GET_POKEMON_IMG, payload: pokemonImages})
-//   }
-// }
+export const pokemonImages = () => {
+  return async function (dispatch) {
+    const apiData = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10`);
+    const pokemonImages = await apiData.data.results.map(async (result) => {
+      const pokemonData = await axios.get(result.url);
+      return pokemonData.data.sprites.front_default;
+    });
+    dispatch({type: GET_POKEMON_IMG, payload: pokemonImages})
+  }
+}
 
 
   export const filterType = (value) => {
@@ -71,10 +69,9 @@ export const orderByAttack = (value) => {
   return { type: ORDER_BY_ATTACK, payload: value };
 };
 
-export const OrderByName = (name) => {
+export const orderByName = (name) => {
     return { type: ORDER_BY_NAME, payload: name }
 }
-
 
 
 

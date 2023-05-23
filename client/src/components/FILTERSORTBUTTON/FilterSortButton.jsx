@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderByAttack, OrderByName, filterType, getPokemonsByType, filterDbApi} from '../../redux/actions';
+import { orderByAttack, orderByName, filterType, getPokemonsByType, filterDbApi } from '../../redux/actions';
 import './FilterSortButton.css';
 
 function FilterSortButton() {
@@ -8,6 +8,7 @@ function FilterSortButton() {
   const types = useSelector(state => state.types);
   const [selectedType, setSelectedType] = React.useState('');
   const [selectedOrigin, setSelectedOrigin] = React.useState('');
+  const userPokemons = useSelector(state => state.userPokemons);
 
   useEffect(() => {
     dispatch(getPokemonsByType());
@@ -16,17 +17,17 @@ function FilterSortButton() {
   const handleOrderAttackUP = () => {
     dispatch(orderByAttack("asc"));
   };
-  
+
   const handleOrderAttackDOWN = () => {
     dispatch(orderByAttack("desc"));
   };
 
   const handleOrderNameUP = () => {
-    dispatch(OrderByName("Asc"));
+    dispatch(orderByName("asc"));
   };
-  
+
   const handleOrderNameDOWN = () => {
-    dispatch(OrderByName("Desc"));
+    dispatch(orderByName("desc"));
   };
 
   const handleFilterType = (event) => {
@@ -35,47 +36,52 @@ function FilterSortButton() {
     dispatch(filterType(type));
   };
 
+  const hasUserCreatedPokemons = () => {
+    return userPokemons.length > 0;
+  };
+
   const handleFilterDbApi = (event) => {
     const origin = event.target.value;
     setSelectedOrigin(origin);
     dispatch(filterDbApi(origin));
-  };  
+  };
+
+  // if (selectedOrigin === "DATABASE" && !hasUserCreatedPokemons()) {
+  //   return (
+  //     <div>
+  //       <p>NO POKEMONS CREATED YET! </p>
+  //       <p>Create yours, click below!</p>
+  //     </div>
+  //   )
+  // }
 
   return (
     <div className="FilterSortButton">
       <h2>FILTERS:</h2>
-      <div className="section">
-        <h3>BY ATTACK</h3>
-        <div className="buttonAttack">
-          <button onClick={handleOrderAttackUP}>&uarr;</button>
-          <button onClick={handleOrderAttackDOWN}>&darr;</button>
-        </div>
+      <h3>TYPE</h3>
+      <select value={selectedType} onChange={handleFilterType} className='buttonType'>
+        <option value="">All Types</option>
+        {types && types.split(',').map((type) => (
+          <option key={type.trim()} value={type.trim()}>
+            {type.trim()}
+          </option>
+        ))}
+      </select>
+      <h3>ORIGIN</h3>
+      <select value={selectedOrigin} onChange={handleFilterDbApi} className='buttonOrigin'>
+        <option value="">All Origins</option>
+        <option value="API">ORIGINALS</option>
+        <option value="DATABASE">CREATED BY YOU</option>
+      </select>
+      <h3>BY ATTACK</h3>
+      <div className="buttonAttack">
+      <button onClick={handleOrderAttackDOWN}>+</button>
+        <button onClick={handleOrderAttackUP}>-</button>
       </div>
-      <div className="section">
-        <h3>BY NAME</h3>
-        <div className="buttonName">
-          <button onClick={handleOrderNameUP}>&uarr;</button>
-          <button onClick={handleOrderNameDOWN}>&darr;</button>
-        </div>
-      </div>
-      <div className="section">
-        <h3>ORIGIN</h3>
-        <select value={selectedOrigin} onChange={handleFilterDbApi} className='buttonOrigin'>
-          <option value="">All Origins</option>
-          <option value="API">API</option>
-          <option value="DATABASE">BDD</option>
-        </select>
-      </div>
-      <div className="section">
-        <h3>TYPE</h3>
-        <select value={selectedType} onChange={handleFilterType} className='buttonType'>
-          <option value="">All Types</option>
-          {types && types.split(',').map((type) => (
-            <option key={type.trim()} value={type.trim()}>
-              {type.trim()}
-            </option>
-          ))}
-        </select>
+      <h3>BY NAME</h3>
+      <div className="buttonName">
+        <button onClick={handleOrderNameUP}>A-Z</button>
+        <button onClick={handleOrderNameDOWN}>Z-A</button>
       </div>
     </div>
   );

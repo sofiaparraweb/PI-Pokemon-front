@@ -33,7 +33,6 @@ const getDetail = async (req, res) => {
 
         return res.status(200).json(formattedPokemon);
       }
-
       // Si no se encontró en la base de datos, devolver un error
 return res.status(404).json({ error: 'Could not find the pokemon in the Data Base' });
     }
@@ -44,7 +43,7 @@ return res.status(404).json({ error: 'Could not find the pokemon in the Data Bas
     const formattedPokemon = {
       id: data.id,
       name: data.name,
-      image: data.sprites.front_default,
+      image: data.sprites.other.dream_world.front_default,
       life: data.stats.find((stat) => stat.stat.name === 'hp').base_stat,
       attack: data.stats.find((stat) => stat.stat.name === 'attack').base_stat,
       defense: data.stats.find((stat) => stat.stat.name === 'defense').base_stat,
@@ -56,7 +55,7 @@ return res.status(404).json({ error: 'Could not find the pokemon in the Data Bas
 
     res.status(200).json(formattedPokemon);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).json({ error: "Could not find the pokemon in the Data Base" });
   }
 };
 
