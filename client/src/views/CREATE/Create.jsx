@@ -1,7 +1,10 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { validatePokemon } from './Validation';
 import './Create.css';
+import { getPokemonImages } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavBar } from '../../components/index';
 
 const Create = () => {
   const [newPokemon, setNewPokemon] = useState({
@@ -10,12 +13,12 @@ const Create = () => {
     life: '',
     attack: '',
     defense: '',
-    speed: '20',
-    height: '20',
-    weight: '20',
+    speed: '',
+    height: '',
+    weight: '',
     type: [],
   });
-  
+
   const types = [
     { value: '', label: 'Select a type' },
     { value: 'normal', label: 'Normal' },
@@ -51,6 +54,7 @@ const Create = () => {
   });
 
   const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+  const [formValid, setFormValid] = useState(false);
 
   const changeHandler = (event) => {
     const property = event.target.name;
@@ -76,69 +80,129 @@ const Create = () => {
         [property]: value,
       }));
     }
-
-    setErrors(validatePokemon({ ...newPokemon, [property]: value }, errors, isSubmitClicked));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [property]: '',
+    }));
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
     setIsSubmitClicked(true);
 
-    setErrors(validatePokemon(newPokemon, errors, true));
+    setErrors(validatePokemon(newPokemon, errors));
 
-    const formValid = Object.values(errors).every((val) => val === '');
-    if (formValid) {
-      axios
-        .post('http://localhost:3001/pokemons', newPokemon)
-        .then((res) => {
-          console.log(res);
-          alert(res.data);
-          setNewPokemon({
-            name: '',
-            image: '',
-            life: '',
-            attack: '',
-            defense: '',
-            speed: '',
-            height: '',
-            weight: '',
-            type: '',
-          });
-          setErrors({
-            name: '',
-            image: '',
-            life: '',
-            attack: '',
-            defense: '',
-            speed: '',
-            height: '',
-            weight: '',
-            type: '',
-          });
-        })
-        .catch((err) => alert(err));
-    } else {
-      alert('Please fill out all required fields before submitting the form.');
+    if (Object.values(errors).some((val) => val !== '')) {
+      return;
     }
+    console.log(newPokemon);
+    console.log(errors);
+    axios
+      .post('http://localhost:3001/pokemons', newPokemon)
+      .then((res) => {
+        console.log(res);
+        alert(res.data);
+        setNewPokemon({
+          name: '',
+          image: '',
+          life: '',
+          attack: '',
+          defense: '',
+          speed: '',
+          height: '',
+          weight: '',
+          type: [],
+        });
+        setErrors({
+          name: '',
+          image: '',
+          life: '',
+          attack: '',
+          defense: '',
+          speed: '',
+          height: '',
+          weight: '',
+          type: '',
+        });
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log(1)
+          const errorMessage = err.response.data.message;
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            server: errorMessage,
+          }));
+        } else {
+          console.log(2)
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            server: 'Failed to create Pokemon',
+          }));
+        }
+      });
   };
-  
-  
+
+  const dispatch = useDispatch();
+  const pokemonImages = useSelector((state) => state.pokemonImages);
+  const [selectedImage, setSelectedImage] = useState('');
+
+  useEffect(() => {
+    dispatch(getPokemonImages());
+  }, [dispatch]);
+
+  const handleImageChange = (event) => {
+    setSelectedImage(event.target.value);
+    setNewPokemon((pokemon)=>({
+      ...pokemon,
+      image: event.target.value
+    }))
+  };
+
+  const renderImages = () => {
+    if (pokemonImages.length === 0) {
+      return <span>Loading...</span>;
+    }
+    return pokemonImages.map((imageUrl, index) => (
+      <img
+        key={index}
+        src={imageUrl}
+        alt={`Image ${index + 1}`}
+        className={selectedImage === imageUrl ? 'selected' : ''}
+        onClick={() => setSelectedImage(imageUrl)}
+      />
+    ));
+  };
+
+  useEffect(() => {
+    const isValid = Object.values(errors).every((val) => val === '');
+    setFormValid(isValid);
+  }, [errors]);
+
   return (
-    <form onSubmit={submitHandler} className="form">
-      <h1>CREATE YOUR POKEMON</h1>
-      <div>
-        <label>Name</label>
-        <input type="text" value={newPokemon.name} onChange={changeHandler} name="name" />
-        {isSubmitClicked && errors.name && <span>{errors.name}</span>}
-      </div>
-      <div>
-        <label>HP</label>
-        <div className="range-container">
-          <input type="range" min="0" max="150" value={newPokemon.life || '20'} onChange={changeHandler} name="life" />
-          <span className="range-value">{newPokemon.life}</span>
+    <div>
+      <form onSubmit={submitHandler} className="form">
+        <h1>CREATE YOUR POKEMON</h1>
+        <div>
+          <label>Name</label>
+          <input type="text" value={newPokemon.name} onChange={changeHandler} name="name" />
+          {isSubmitClicked && errors.name && <span>{errors.name}</span>}
         </div>
-        {errors.life && <span>{errors.life}</span>}
-      </div>
+        <div>
+          <label>HP</label>
+          <div className="range-container">
+            <input
+              type="range"
+              min="0"
+              max="150"
+              value={newPokemon.life || '20'}
+              onChange={changeHandler}
+              name="life"
+            />
+            <span className="range-value">{newPokemon.life}</span>
+          </div>
+          {errors.life && <span>{errors.life}</span>}
+        </div>
   
       <div>
         <label>Attack</label>
@@ -198,15 +262,29 @@ const Create = () => {
       </div>
       
       <div>
-        <label>IMAGE</label>
-        <input type="text" value={newPokemon.image} onChange={changeHandler} name="image" />
-        {errors.image && <span>{errors.image}</span>}
+        <label>Select an Image:</label>
+        <div className="image-container">
+          <select onChange={handleImageChange} value={selectedImage}>
+            <option value="">Select Image</option>
+            {pokemonImages.map((imageUrl, index) => (
+              <option key={index} value={imageUrl}>
+                 {index + 1}
+              </option>
+            ))}
+          </select>
+          {selectedImage && (
+            <img src={selectedImage} alt="Selected Pokemon" className="selected-image" />
+          )}
+        </div>
       </div>
   
-      <button type="submit">CREATE POKEMON</button>
-    </form>
+      <button type="submit" disabled={!formValid}>
+          CREATE POKEMON
+        </button>
+      </form>
+      <NavBar />
+    </div>
   );
-          }
+};
 
 export default Create;
-

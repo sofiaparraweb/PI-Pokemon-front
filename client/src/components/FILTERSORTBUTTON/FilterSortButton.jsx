@@ -1,59 +1,63 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderByAttack, orderByName, filterType, getPokemonsByType, filterDbApi } from '../../redux/actions';
+import { orderByAttack, orderByName, filterType, getPokemonsByType, filterDbApi, getAllPokemons } from '../../redux/actions';
 import './FilterSortButton.css';
 
-function FilterSortButton() {
+function FilterSortButton({setPage}) {
   const dispatch = useDispatch();
   const types = useSelector(state => state.types);
   const [selectedType, setSelectedType] = React.useState('');
   const [selectedOrigin, setSelectedOrigin] = React.useState('');
   const userPokemons = useSelector(state => state.userPokemons);
-
+ 
   useEffect(() => {
     dispatch(getPokemonsByType());
   }, [dispatch]);
 
   const handleOrderAttackUP = () => {
     dispatch(orderByAttack("asc"));
+    setPage(1);
   };
 
   const handleOrderAttackDOWN = () => {
     dispatch(orderByAttack("desc"));
+    setPage(1);
   };
 
   const handleOrderNameUP = () => {
     dispatch(orderByName("asc"));
+    setPage(1)
   };
 
   const handleOrderNameDOWN = () => {
     dispatch(orderByName("desc"));
+    setPage(1)
   };
 
   const handleFilterType = (event) => {
     const type = event.target.value;
     setSelectedType(type);
     dispatch(filterType(type));
+    setPage(1)
   };
 
-  const hasUserCreatedPokemons = () => {
-    return userPokemons.length > 0;
-  };
+  // const hasUserCreatedPokemons = () => {
+  //   return userPokemons.length > 0;
+  // };
 
   const handleFilterDbApi = (event) => {
     const origin = event.target.value;
     setSelectedOrigin(origin);
     dispatch(filterDbApi(origin));
+    setPage(1)
   };
 
-  // if (selectedOrigin === "DATABASE" && !hasUserCreatedPokemons()) {
-  //   return (
-  //     <div>
-  //       <p>NO POKEMONS CREATED YET! </p>
-  //       <p>Create yours, click below!</p>
-  //     </div>
-  //   )
-  // }
+  const deleteFilters = () => {
+    setSelectedType('');
+    setSelectedOrigin('');
+    dispatch(getAllPokemons());
+    setPage(1);
+  }
 
   return (
     <div className="FilterSortButton">
@@ -82,6 +86,9 @@ function FilterSortButton() {
       <div className="buttonName">
         <button onClick={handleOrderNameUP}>A-Z</button>
         <button onClick={handleOrderNameDOWN}>Z-A</button>
+      </div>
+      <div className='buttonDelete'>
+        <button onClick={deleteFilters}>DELETE FILTERS</button>
       </div>
     </div>
   );

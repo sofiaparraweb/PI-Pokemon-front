@@ -17,6 +17,7 @@ const Card = (props) => {
             <p className="card-stat">ATTACK: {props.attack}</p>
             <p className="card-stat">DEFENSE: {props.defense}</p>
             <p className="card-stat">TYPE: {props.types}</p>
+            {/* hacer un map para que me aparezcan separados */}
           </Link>
         </div>
       </div>

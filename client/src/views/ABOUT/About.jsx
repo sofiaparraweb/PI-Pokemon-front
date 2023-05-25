@@ -1,5 +1,6 @@
 import React from 'react';
 import './About.css';
+import { NavBar } from '../../components/index';
 
 const About = () => {
   return (
@@ -49,6 +50,7 @@ const About = () => {
           </li>
         </ul>
       </aside>
+      <NavBar />
     </div>
   );
 }

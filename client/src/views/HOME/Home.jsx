@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Cards } from '../../components/index'
+import { Cards, NavBar } from '../../components/index'
 
 const Home = () => {
     
@@ -8,8 +8,8 @@ const Home = () => {
     return (
         <div className=''>
             <div>
+                <NavBar></NavBar>
                 <Cards pokemons={pokemons}/>
-            
             </div>
         </div>
     )

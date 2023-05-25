@@ -1,7 +1,7 @@
 // la action nes la descripcion especiifca de lo  q tengo q hacer
 
 import axios from 'axios'
-import { GET_POKEMONS, GET_POKEMON_DETAIL, GET_POKEMON_NAME, FILTER_TYPE, FILTER_DBAPI, GET_POKEMON_TYPE, ORDER_BY_NAME, ORDER_BY_ATTACK, GET_POKEMON_IMG 
+import { GET_POKEMONS, GET_ALL_POKEMONS, GET_POKEMON_DETAIL, GET_POKEMON_NAME, FILTER_TYPE, FILTER_DBAPI, GET_POKEMON_TYPE, ORDER_BY_NAME, ORDER_BY_ATTACK, GET_POKEMON_IMG 
 } from './action-types'
 
 export const getPokemons = () => {
@@ -12,6 +12,11 @@ export const getPokemons = () => {
     dispatch({type: GET_POKEMONS, payload: pokemons})
     }
 }
+
+export const getAllPokemons = () => {
+  return async function (dispatch) {
+  dispatch({type: GET_ALL_POKEMONS})  
+}}
 
 export const getPokemonDetail = (id) => {
     return async function (dispatch){
@@ -44,18 +49,23 @@ export const getPokemonsByType = () => {
   };
 };
 
-
-export const pokemonImages = () => {
+export const getPokemonImages = () => {
   return async function (dispatch) {
-    const apiData = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=10`);
-    const pokemonImages = await apiData.data.results.map(async (result) => {
-      const pokemonData = await axios.get(result.url);
-      return pokemonData.data.sprites.front_default;
-    });
-    dispatch({type: GET_POKEMON_IMG, payload: pokemonImages})
-  }
-}
-
+    try {
+      const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=10');
+      const pokemonData = response.data.results;
+      const pokemonImages = await Promise.all(
+        pokemonData.map(async (result) => {
+          const pokemonResponse = await axios.get(result.url);
+          return pokemonResponse.data.sprites.other.dream_world.front_default;
+        }) 
+      );
+      dispatch({ type: GET_POKEMON_IMG, payload: pokemonImages });
+    } catch (error) {
+      console.log('Error fetching Pokemon images:', error);
+    }
+  };
+};
 
   export const filterType = (value) => {
     return { type: FILTER_TYPE, payload:value}

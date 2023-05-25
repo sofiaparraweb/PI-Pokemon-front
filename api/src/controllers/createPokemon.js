@@ -17,7 +17,7 @@ const createPokemon = async (req, res) => {
         //Asocia el pokemon con el tipo enviado anteriormente
         newPokemon.addType(arreTypes);
 
-        res.status(200).json(" Pokemon created ");
+        res.status(200).json("Pokemon created");
     }
     catch (error) {
         res.status(404).json({error: error.message});

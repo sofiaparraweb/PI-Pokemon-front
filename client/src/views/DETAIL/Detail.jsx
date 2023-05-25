@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { getPokemonDetail } from '../../redux/actions';
 import './Detail.css';
+import { NavBar } from '../../components/index';
 
 const Detail = () => {
   const dispatch = useDispatch();
@@ -118,6 +119,7 @@ const Detail = () => {
           </div>
         )
       )}
+      <NavBar />
     </div>
   );
 };

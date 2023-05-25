@@ -4,6 +4,7 @@ import './Cards.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPokemons } from '../../redux/actions';
 import Pagination from '../PAGINATION/Pagination';
+import NavBar from '../NAVBAR/NavBar';
 
 const Cards = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const Cards = () => {
       const { id, name, image, attack, defense, speed, height, weight, types } = pokemons;
       return (
         <div className='pokemon-container'>
+          <NavBar setPage={setPage}/>
           <div className='pokemon-selected'>
             <Card 
               key={id}
@@ -50,6 +52,7 @@ const Cards = () => {
               weight={weight}
               types={types}
               className="card-selected"
+              setPage={setPage}
             />
           </div>
         </div>
@@ -63,6 +66,7 @@ const Cards = () => {
   
   return (
     <div>
+      <NavBar setPage={setPage}/>
       <div className="cards-container">
         {(filteredPokemons.length > 0 ? filteredPokemons : pokemons)
           .slice((page - 1) * perPage, (page - 1) * perPage + perPage)
@@ -78,6 +82,7 @@ const Cards = () => {
               height={pokemon.height}
               weight={pokemon.weight}
               types={pokemon.types}
+              setPage={setPage}
             />
           ))}
       </div>
