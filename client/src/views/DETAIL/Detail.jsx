@@ -96,7 +96,7 @@ const Detail = () => {
                   <p>TYPE:</p>
                   {pokemonsDetail.types && (
                     <div>
-                                           {pokemonsDetail.types.split(', ').map((type, index) => (
+                  {pokemonsDetail.types.split(', ').map((type, index) => (
                         <p key={index}>{type}</p>
                       ))}
                     </div>

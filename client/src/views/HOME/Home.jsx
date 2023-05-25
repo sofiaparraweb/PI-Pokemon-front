@@ -3,7 +3,7 @@ import { Cards, NavBar } from '../../components/index'
 
 const Home = () => {
     
-    const pokemons = useSelector((state) => state.pokemons)
+const pokemons = useSelector((state) => state.pokemons)
     
     return (
         <div className=''>
