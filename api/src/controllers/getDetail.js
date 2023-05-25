@@ -5,9 +5,9 @@ const getDetail = async (req, res) => {
   const { idPokemon } = req.params;
 
   try {
-  
+  // verificación para determinar si idPokemon no es un número --> signfica q es UUID
     if (isNaN(idPokemon)) {
-     
+     //bUSCA EN bdd
      const pokemonFromDb = await Pokemon.findByPk(idPokemon, {
       include:{
         model:Type,

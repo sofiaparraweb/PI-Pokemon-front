@@ -4,7 +4,7 @@ export const validatePokemon = (newPokemon, errors) => {
 // Validar el nombre del pokemon
 if (!newPokemon.name) {
   newErrors.name = 'Please fill in this field';
-} else if (!/^[a-zA-Z ]+$/.test(newPokemon.name)) {
+} else if (!/^[a-zA-Z]+$/.test(newPokemon.name)) {
   newErrors.name = 'Name can only contain letters';
 } else {
   newErrors.name = '';

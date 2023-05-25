@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <div className=''>
             <div>
-                <NavBar></NavBar>
+                <NavBar />
                 <Cards pokemons={pokemons}/>
             </div>
         </div>

@@ -60,9 +60,9 @@ const Create = () => {
     const property = event.target.name;
     const value = event.target.value;
 
+    //para seleccionar mas de un tipo
     if (property === 'type') {
       const typeIndex = newPokemon.type.indexOf(value);
-
       if (typeIndex === -1) {
         setNewPokemon((prevPokemon) => ({
           ...prevPokemon,
@@ -74,7 +74,9 @@ const Create = () => {
           type: prevPokemon.type.filter((type) => type !== value),
         }));
       }
-    } else {
+    } 
+    //para otros campos
+    else {
       setNewPokemon((prevPokemon) => ({
         ...prevPokemon,
         [property]: value,
@@ -82,7 +84,7 @@ const Create = () => {
     }
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [property]: '',
+      [property]: validatePokemon({ ...newPokemon, [property]: value }, prevErrors)[property],
     }));
   };
   
@@ -190,7 +192,7 @@ const Create = () => {
         <div>
           <label>Name *</label>
           <input type="text" value={newPokemon.name} onChange={changeHandler} name="name" />
-          {isSubmitClicked && errors.name && <span>{errors.name}</span>}
+          {errors.name && <span>{errors.name}</span>}
         </div>
         <div>
           <label>HP *</label>

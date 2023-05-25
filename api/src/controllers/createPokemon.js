@@ -2,26 +2,28 @@ const { Pokemon, Type } = require('../db');
 const axios = require("axios");
 
 const createPokemon = async (req, res) => {
-    try {
-        //Desestructuro lo que viene como parametro
-        const { name, image, life, attack, defense, speed, height, weight, type } = req.body;
-        
-        const arreTypes = Array.isArray(type) ?
-        await Promise.all(type.map(async(t)=>{
-            return await Type.findOne({ where: { name: t } });
-        })) : [];
+  try {
+    // Desestructurar los datos enviados
+    const { name, image, life, attack, defense, speed, height, weight, type } = req.body;
 
-        //Se crea el pokemon nuevo
-        let newPokemon = await Pokemon.create({ name, image, life, attack, defense, speed, height, weight, type });
-        
-        //Asocia el pokemon con el tipo enviado anteriormente
-        newPokemon.addType(arreTypes);
+    // Si el tipo enviado es un arreglo, se realiza una búsqueda de cada tipo en la bdd
+    const arreTypes = Array.isArray(type) ?
+      await Promise.all(type.map(async (t) => {
+        return await Type.findOne({ where: { name: t } });
+      })) : [];
 
-        res.status(200).json("Pokemon created");
-    }
-    catch (error) {
-        res.status(404).json({error: error.message});
-    }
+    // Creo el nuevo Pokémon en la base de datos utilizando el modelo "Pokemon"
+    let newPokemon = await Pokemon.create({ name, image, life, attack, defense, speed, height, weight, type });
+
+    // Asocio el Pok
+    newPokemon.addType(arreTypes);
+
+    // Respuesta OK
+    res.status(200).json(" Pokemon created ");
+  } catch (error) {
+    // Si ocurre error durante el proceso, se envía una respuesta error
+    res.status(404).json({ error: error.message });
+  }
 }
 
 module.exports = createPokemon;

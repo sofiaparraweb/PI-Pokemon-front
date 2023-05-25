@@ -41,10 +41,6 @@ function FilterSortButton({setPage}) {
     setPage(1)
   };
 
-  // const hasUserCreatedPokemons = () => {
-  //   return userPokemons.length > 0;
-  // };
-
   const handleFilterDbApi = (event) => {
     const origin = event.target.value;
     setSelectedOrigin(origin);
