@@ -37,39 +37,6 @@ if (!newPokemon.name) {
     newErrors.defense = '';
   }
 
-  // // Validar la velocidad del pokemon
-  // if (newPokemon.speed !== '') {
-  //   if (newPokemon.speed < 1 || newPokemon.speed > 250) {
-  //     newErrors.speed = 'Speed must be between 1 and 250';
-  //   } else {
-  //     newErrors.speed = '';
-  //   }
-  // } else {
-  //   newErrors.speed = '';
-  // }
-
-  // // Validar la altura del pokemon
-  // if (newPokemon.height !== '') {
-  //   if (newPokemon.height < 1 || newPokemon.height > 100) {
-  //     newErrors.height = 'Height must be between 1 and 100';
-  //   } else {
-  //     newErrors.height = '';
-  //   }
-  // } else {
-  //   newErrors.height = '';
-  // }
-
-  // // Validar el peso del pokemon
-  // if (newPokemon.weight !== '') {
-  //   if (newPokemon.weight < 1 || newPokemon.weight > 100) {
-  //     newErrors.weight = 'Weight must be between 1 and 100';
-  //   } else {
-  //     newErrors.weight = '';
-  //   }
-  // } else {
-  //   newErrors.weight = '';
-  //}
-
   // Validar el tipo del pokemon
   if (!newPokemon.type || newPokemon.type.length === 0) {
     newErrors.type = 'Please select at least one type';

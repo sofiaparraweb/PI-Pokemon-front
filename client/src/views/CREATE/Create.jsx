@@ -85,8 +85,9 @@ const Create = () => {
       [property]: '',
     }));
   };
+  
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
     setIsSubmitClicked(true);
 
@@ -95,10 +96,15 @@ const Create = () => {
     if (Object.values(errors).some((val) => val !== '')) {
       return;
     }
-    console.log(newPokemon);
-    console.log(errors);
+    
+    const { name, image, life, attack, defense, speed, height, weight, type } = newPokemon
+    let pokemon = {name:name, image:image, life:life, attack:attack, defense:defense, type:type}
+    if(speed.length)pokemon={...pokemon,speed:speed}
+    if(height.length)pokemon={...pokemon,height:height}
+    if(weight.length)pokemon={...pokemon,weight:weight}
+    if( name.length && image.length && life.length && attack.length && defense.length && type.length){
     axios
-      .post('http://localhost:3001/pokemons', newPokemon)
+      .post('http://localhost:3001/pokemons', pokemon)
       .then((res) => {
         console.log(res);
         alert(res.data);
@@ -127,20 +133,18 @@ const Create = () => {
       })
       .catch((err) => {
         if (err.response) {
-          console.log(1)
           const errorMessage = err.response.data.message;
           setErrors((prevErrors) => ({
             ...prevErrors,
             server: errorMessage,
           }));
         } else {
-          console.log(2)
           setErrors((prevErrors) => ({
             ...prevErrors,
             server: 'Failed to create Pokemon',
           }));
         }
-      });
+      });}
   };
 
   const dispatch = useDispatch();
@@ -184,12 +188,12 @@ const Create = () => {
       <form onSubmit={submitHandler} className="form">
         <h1>CREATE YOUR POKEMON</h1>
         <div>
-          <label>Name</label>
+          <label>Name *</label>
           <input type="text" value={newPokemon.name} onChange={changeHandler} name="name" />
           {isSubmitClicked && errors.name && <span>{errors.name}</span>}
         </div>
         <div>
-          <label>HP</label>
+          <label>HP *</label>
           <div className="range-container">
             <input
               type="range"
@@ -205,7 +209,7 @@ const Create = () => {
         </div>
   
       <div>
-        <label>Attack</label>
+        <label>Attack *</label>
         <div className="range-container">
           <input type="range" min="0" max="100" value={newPokemon.attack || '20'} onChange={changeHandler} name="attack" />
           <span className="range-value">{newPokemon.attack}</span>
@@ -214,7 +218,7 @@ const Create = () => {
       </div>
   
       <div>
-        <label>Defense</label>
+        <label>Defense *</label>
         <div className="range-container">
           <input type="range" min="0" max="100" value={newPokemon.defense || '20'} onChange={changeHandler} name="defense" />
           <span className="range-value">{newPokemon.defense}</span>
@@ -250,7 +254,7 @@ const Create = () => {
       </div>
   
       <div className="type-select-container">
-        <label>Type</label>
+        <label>Type *</label>
         <select value={newPokemon.type} onChange={changeHandler} name="type" multiple>
           {types.map((type) => (
             <option key={type.value} value={type.value}>
@@ -262,7 +266,7 @@ const Create = () => {
       </div>
       
       <div>
-        <label>Select an Image:</label>
+        <label>Select an Image: *</label>
         <div className="image-container">
           <select onChange={handleImageChange} value={selectedImage}>
             <option value="">Select Image</option>

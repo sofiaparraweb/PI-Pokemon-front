@@ -37,7 +37,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredPokemons: state.allPokemons,
-        // pokemons: state.allPokemons,
+        pokemons: state.allPokemons,
       };
 
     case GET_POKEMON_NAME:
