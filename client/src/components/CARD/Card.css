@@ -48,7 +48,7 @@
     background-color: #ffffff;
     transform: perspective(600px) rotateY(180deg);
     padding: 15px;
-    background-color: #d64a3a;
+    background-color: #b84b3f;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -91,7 +91,7 @@
     margin-bottom: 10px;
     font-size: 24px;
     letter-spacing: 2px;
-    color: black;
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;

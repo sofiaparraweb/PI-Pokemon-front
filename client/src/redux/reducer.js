@@ -109,26 +109,26 @@ const rootReducer = (state = initialState, action) => {
     case GET_POKEMON_TYPE:
       return { ...state, types: action.payload };
 
-    case FILTER_DBAPI:
-    // Filtra los pokemons según el origen de los datos (API o Base de Datos)
-    if (action.payload !== 'all') {
-      const filteredDbApi = state.filteredPokemons.filter((pokemon) => {
-        if (action.payload === 'API') {
-          // Filtra los pokemons obtenidos de la API (cuyo ID no es un número)
-          return isNaN(pokemon.id); 
+      case FILTER_DBAPI:
+        // Filtra los pokemons según el origen de los datos (API o Base de Datos)
+        if (action.payload !== '') { // Cambio aquí: de 'all' a ''
+          const filteredDbApi = state.pokemons.filter((pokemon) => {
+            if (action.payload === 'API') {
+              // Filtra los pokemons obtenidos de la API (cuyo ID no es un número)
+              return !isNaN(pokemon.id);
+            }
+            if (action.payload === 'DATABASE') {
+              // Filtra los pokemons obtenidos de la Base de Datos (cuyo ID es un número)
+              return isNaN(pokemon.id);
+            }
+            return false;
+          });
+          if (!filteredDbApi.length) alert('No pokemons found with this filter');
+          return { ...state, filteredPokemons: filteredDbApi };
         }
-        if (action.payload === 'DATABASE') {
-          // Filtra los pokemons obtenidos de la Base de Datos (cuyo ID es un número)
-          return !isNaN(pokemon.id); 
-        }
-        return false;
-      });
-      if (!filteredDbApi.length) alert('No pokemons found with this filter');
-      return { ...state, filteredPokemons: filteredDbApi };
-    }
-    // Si el payload es 'all', muestra todos los pokemons sin filtrar
-    return { ...state, filteredPokemons: state.pokemons };
-  
+        // Si el payload es '', muestra todos los pokemons sin filtrar
+        return { ...state, filteredPokemons: state.pokemons };
+      
   
     case GET_POKEMON_IMG:
       return {

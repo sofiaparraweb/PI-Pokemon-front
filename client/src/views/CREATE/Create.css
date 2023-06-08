@@ -15,7 +15,7 @@
   color: whitesmoke;
   font-size: 34px;
   text-align: center;
-  background-color: #d64a3a;
+  background-color: #b84b3f;
   border-radius: 10px 10px 10px 10px;
 }
 
@@ -52,7 +52,7 @@ select {
 button[type="submit"] {
   margin: 20px 0;
   padding: 10px 20px;
-  background-color: #d64a3a;
+  background-color: #b84b3f;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -84,7 +84,7 @@ button[type="submit"]:hover {
 }
 
 span.error-message {
-  color: #d64a3a;
+  color: #b84b3f;
   font-size: 14px;
   margin-top: 5px;
   text-align: center;
@@ -103,7 +103,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #d64a3a;
+  background-color: #b84b3f;
   cursor: pointer;
 }
 
@@ -111,7 +111,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   -webkit-appearance: none;
   appearance: none;
   height: 4px;
-  background-color: #d64a3a;
+  background-color: #b84b3f;
   cursor: pointer;
 }
 
@@ -121,7 +121,7 @@ input[type="range"]::-moz-range-thumb {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #d64a3a;
+  background-color: #b84b3f;
   cursor: pointer;
 }
 
@@ -129,7 +129,7 @@ input[type="range"]::-moz-range-track {
   -moz-appearance: none;
   appearance: none;
   height: 4px;
-  background-color: #d64a3a;
+  background-color: #b84b3f;
   cursor: pointer;
 }
 
@@ -139,7 +139,7 @@ input[type="range"]::-ms-thumb {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #d64a3a;
+  background-color: #b84b3f;
   cursor: pointer;
 }
 
@@ -147,7 +147,7 @@ input[type="range"]::-ms-track {
   -ms-appearance: none;
   appearance: none;
   height: 4px;
-  background-color: #d64a3a;
+  background-color: #b84b3f;
   cursor: pointer;
 }
 

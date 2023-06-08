@@ -12,7 +12,7 @@
   font-weight: bold;
   margin-bottom: 10px;
   text-transform: uppercase;
-  background-color: #cd4949;
+  background-color: #b84b3f;
   padding: 20px;
   border-radius: 12px;
   color: white;
@@ -85,7 +85,7 @@
   margin: 2px 5px;
   padding: 5px 10px;
   border-radius: 4px;
-  background-color: #d64a3a;
+  background-color: #b84b3f;
   color: white;
   font-weight: bold;
 }
@@ -93,7 +93,7 @@
 .detail-back-link {
   text-decoration: none;
   font-size: 24px;
-  color: #d64a3a;
+  color: #b84b3f;
   background-color: #eaeaea;
   padding: 10px;
   border-radius: 50%; 

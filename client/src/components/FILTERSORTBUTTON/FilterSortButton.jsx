@@ -43,11 +43,12 @@ function FilterSortButton({setPage}) {
 
   const handleFilterDbApi = (event) => {
     const origin = event.target.value;
+    console.log(origin);
     setSelectedOrigin(origin);
     dispatch(filterDbApi(origin));
-    setPage(1)
+    setPage(1);
   };
-
+  
   const deleteFilters = () => {
     setSelectedType('');
     setSelectedOrigin('');

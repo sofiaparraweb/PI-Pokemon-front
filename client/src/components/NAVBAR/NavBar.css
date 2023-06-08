@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-color: #d64a3a; 
+  background-color: #b84b3f; 
   color: #e2e2ae; 
   padding: 20px;
   width: 250px;
@@ -38,7 +38,7 @@
   justify-content: center;
   background-color: white;
   font-size: 19px;
-  color: #d64a3a;
+  color: #b84b3f;
   font-weight: bold;
   padding: 8px 16px;
   border-radius: 4px;
