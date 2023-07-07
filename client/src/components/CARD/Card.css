@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Peta:wght@300&display=swap');
+
 .card-container {
     width: 200px;
     height: 300px;
@@ -57,7 +59,7 @@
   }
   
   .card-name {
-    font-family: monospace;
+    font-family: 'Lexend Peta', sans-serif;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -87,10 +89,9 @@
   
   
   .card-stat {
-    font-family: monospace;
+    font-family: 'Lexend Peta', sans-serif;
     margin-bottom: 10px;
-    font-size: 24px;
-    letter-spacing: 2px;
+    font-size: 20px;
     color: white;
     display: flex;
     flex-direction: column;

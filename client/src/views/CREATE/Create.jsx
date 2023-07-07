@@ -5,6 +5,7 @@ import './Create.css';
 import { getPokemonImages } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavBar } from '../../components/index';
+import Swal from 'sweetalert';
 
 const Create = () => {
   const [newPokemon, setNewPokemon] = useState({
@@ -109,7 +110,13 @@ const Create = () => {
       .post('http://localhost:3001/pokemons', pokemon)
       .then((res) => {
         console.log(res);
-        alert(res.data);
+        Swal.fire({
+          title: 'FELICITACIONES!',
+          text: res.data,
+          icon: 'success',
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Aceptar',
+        });
         setNewPokemon({
           name: '',
           image: '',

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Peta:wght@300&display=swap');
+
 .About {
   display: flex;
   justify-content: center;
@@ -31,7 +33,7 @@
 .profile-card h1 {
   font-size: 36px;
   margin-bottom: 10px;
-  font-family: monospace;
+  font-family: 'Lexend Peta', sans-serif;
   font-weight: bold;
   color: #333333;
 }
@@ -40,12 +42,12 @@
   font-size: 20px;
   color: #b84b3f;
   margin-bottom: 20px;
-  font-family: monospace;
+  font-family: 'Lexend Peta', sans-serif;
 }
 
 .profile-bio {
   margin-bottom: 20px;
-  font-family: monospace;
+  font-family: 'Lexend Peta', sans-serif;
 }
 
 .profile-bio p {

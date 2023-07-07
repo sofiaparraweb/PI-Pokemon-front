@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Peta:wght@300&display=swap');
+
 .form {
   width: 1000px;
   height: auto;
@@ -46,7 +48,7 @@ select {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   font-size: 16px;
   width: 100%;
-  font-family: monospace;
+  font-family: 'Lexend Peta', sans-serif;
 }
 
 button[type="submit"] {

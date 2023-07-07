@@ -20,6 +20,7 @@
   height: 200px;
   width: auto;
   margin-left: -10px;
+  margin-top: -25px;
 }
 
 .NavBar .buttons {
@@ -37,13 +38,13 @@
   align-items: center;
   justify-content: center;
   background-color: white;
-  font-size: 19px;
+  font-size: 14px;
   color: #b84b3f;
   font-weight: bold;
   padding: 8px 16px;
   border-radius: 4px;
   text-decoration: none;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 

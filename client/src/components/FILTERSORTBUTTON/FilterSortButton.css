@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Peta:wght@300&display=swap');
+
+
 .FilterSortButton {
     display: flex;
     flex-direction: column;
@@ -7,7 +10,7 @@
   
   .FilterSortButton h2 {
     font-size: 20px;
-    font-family: monospace;
+    font-family: 'Lexend Peta', sans-serif;
     color: white;
     margin-top: 0px;
     margin-bottom: 5px;
@@ -16,7 +19,7 @@
   
   .FilterSortButton h3 {
     font-size: 14px;
-    font-family: monospace;
+    font-family: 'Lexend Peta', sans-serif;
     color: white;
     margin-bottom: 2px;
     margin-left: 0px;
@@ -31,7 +34,7 @@
     cursor: pointer;
     background-color: white;
     color: #000;
-    font-family: monospace;
+    font-family: 'Lexend Peta', sans-serif;
     font-size: 15px;
     border-radius: 5px;
     width: 210px;
@@ -86,7 +89,7 @@
   }
   
   .FilterSortButton option {
-    font-family: monospace;
+    font-family: 'Lexend Peta', sans-serif;
     font-size: 18px;
   }
 
@@ -106,7 +109,7 @@
   }
 
   .buttonDelete button{
-    font-family: monospace;
+    font-family: 'Lexend Peta', sans-serif;
     background-color: transparent;
     border: none;
     border-radius: 0px;
