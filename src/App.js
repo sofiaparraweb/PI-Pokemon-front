@@ -2,7 +2,7 @@ import './App.css';
 import { Route, useLocation } from 'react-router-dom';
 import { Landing, Home, Detail, Create, About } from './views/index';
 import axios from 'axios';
-axios.defaults.baseURL = "https://pokemon-back-jt9f.onrender.com/";
+axios.defaults.baseURL = "https://pokemon-back-jt9f.onrender.com";
 
 function App() {
 const location = useLocation();
