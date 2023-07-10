@@ -107,7 +107,7 @@ const Create = () => {
     if(weight.length)pokemon={...pokemon,weight:weight}
     if( name.length && image.length && life.length && attack.length && defense.length && type.length){
     axios
-      .post('http://localhost:3001/pokemons', pokemon)
+      .post('https://pokemon-back-jt9f.onrender.com/pokemons', pokemon)
       .then((res) => {
         console.log(res);
         Swal.fire({
