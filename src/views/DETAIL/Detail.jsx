@@ -105,7 +105,7 @@ const Detail = () => {
               </div>
             </div>
             <div className="detail-back-link">
-              <Link to="/home">
+              <Link to="/">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/48/48821.png"
                   alt="Back Home"

@@ -29,7 +29,7 @@ const NavBar = ({setPage}) => {
   
   return (
     <div className='NavBar'>
-      <Link to='/home' className="logo" onClick={handleLogoClick}>
+      <Link to='/' className="logo" onClick={handleLogoClick}>
         <img
           src="https://i.pinimg.com/originals/9e/39/23/9e3923825ba4a4fa967858f980b8460f.png"
           alt="Pokemon Logo"
